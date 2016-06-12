@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>社交日历</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no"> 
+    <link rel="stylesheet" href="style.css" />   
+    <style>
+    body{
+        background: url('./images/back.jpg') fixed ;
+        background-color: #87DE97;
+    }
+    </style>
+</head>
+<body>
+   
+  <div class="home"></div>
+  <script>
+    var WebFontConfig = {
+      google: { families: [ 'Roboto:400,300,500:latin' ] }
+    };
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://cdn.bootcss.com/webfont/1.6.24/webfontloader.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+  </script>
+  <script src="home.bundle.js"></script>
+</body>
+</html>
