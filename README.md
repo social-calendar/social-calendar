@@ -10,7 +10,10 @@ git config --global user.name "your github's name"
 git config --global user.email "your github's email"
 ```
 3. 打开Git Bash命令窗口(如果安装了git，鼠标右键就可以找到Git Bash Here)
+
+```sh
 	git clone https://github.com/social-calendar/social-calendar.git
+```
 4. 克隆完之后，在本地创建dev分支
 
 ```sh
