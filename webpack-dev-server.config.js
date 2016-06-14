@@ -9,9 +9,9 @@ const config = {
   entry: {
     //'webpack/hot/dev-server',
     //'webpack/hot/only-dev-server',
-    home:path.join(__dirname, '/src/app/component/ActiveList.js'),
-    add:path.join(__dirname, '/src/app/component/AddActive.js'),
-    test:path.join(__dirname, '/src/app/component/DateTime.js'),
+    home:path.join(__dirname, '/src/main/webapp/component/ActiveList.js'),
+    add:path.join(__dirname, '/src/main/webapp/component/AddActive.js'),
+    test:path.join(__dirname, '/src/main/webapp/component/DateTime.js'),
 
   },
   //Config options on how to interpret requires imports
@@ -21,7 +21,7 @@ const config = {
   },
   //Server Configuration options
   devServer:{
-    contentBase: 'src/www',  //Relative directory for base of server
+    contentBase: 'src/main/webapp/www',  //Relative directory for base of server
     devtool: 'eval',//为你的代码创建源地址。当有任何报错的时候可以让你更加精确地定位到文件和行号
     hot: true,        //Live-reload
     inline: true,
@@ -42,7 +42,7 @@ const config = {
     //Moves files
     new TransferWebpackPlugin([
       {from: 'www'},
-    ], path.resolve(__dirname, "src")),
+    ], path.resolve(__dirname, "src/main/webapp")),
   ],
   module: {
     loaders: [

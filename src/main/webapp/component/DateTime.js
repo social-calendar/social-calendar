@@ -1,3 +1,4 @@
+// 时间日期选择器组件
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -15,41 +16,53 @@ class DateTime extends React.Component{
         super(props);
         this.handleDateDismiss=this.handleDateDismiss.bind(this);
         this.handleTextFocus=this.handleTextFocus.bind(this);
-        // this.getDateTime=this.getDateTime.bind(this);
-
-
+        this.handleDateChange=this.handleDateChange.bind(this);
+        this.handleTimeChange=this.handleTimeChange.bind(this);
+        this.getDateTime=this.getDateTime.bind(this);
+        var now=new Date();
+        this.state={
+            date:now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate(),
+            time:now.getHours()+":"+now.getMinutes()
+        }
     }
     handleTextFocus(event){
         this.refs.myDate.focus();
-        var dateTime=this.refs.myDate.value+" "+this.refs.myTime.value;
-        this.refs.myDateTime.value=dateTime;
-        console.log('时间日期'+this.refs.myDateTime.value);
     }
-    // getDateTime(){
-    //     return this.refs.myDate.value+" "+this.refs.myTime.value;
-    // }
+    getDateTime(){
+        return this.state.date+" "+this.state.time;
+    }
+    handleDateChange(event,date){
+        this.setState({
+            date:date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()
+        });
+    }
+    handleTimeChange(event,time){
+        this.setState({
+            time:time.getHours()+":"+time.getMinutes()
+        });
+    }
     handleDateDismiss(event){
-         this.refs.myTime.focus();
-        console.log(this.refs.myDate.value);
-
+        this.refs.myTime.focus();
     }
     render(){
         return (
             <div>
-                <TextField hintText="Hint Text" 
+                <TextField 
                     onFocus={this.handleTextFocus} 
-                    ref="myDateTime"
-                    // value={this.refs.myDate.value+" "+this.refs.myTime.value}
+                    value={this.getDateTime()}
+                    id="dateTime"
                 />
                 <DatePicker hintText="开始日期" 
+                    ref="myDate"
                     onDismiss={this.handleDateDismiss} 
                     autoOk={true}
-                    ref="myDate"
-                    id="date"
+                    onChange={this.handleDateChange}
+                    style={{display:'none'}}
                 />
                 <TimePicker hintText="开始时间" format="24hr"
                     ref="myTime"
-                    style={{display:'none'}} 
+                    onChange={this.handleTimeChange}
+                    style={{display:'none'}}
                 />
             </div>
         );

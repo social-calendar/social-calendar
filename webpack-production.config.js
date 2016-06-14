@@ -5,7 +5,11 @@ const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 const config = {
-  entry: [path.join(__dirname, '/src/app/main.js')],
+  entry: {
+    home:path.join(__dirname, '/src/main/webapp/component/ActiveList.js'),
+    add:path.join(__dirname, '/src/main/webapp/component/AddActive.js'),
+    test:path.join(__dirname, '/src/main/webapp/component/DateTime.js'),
+  },
   resolve: {
     //When require, do not have to add these extensions to file's name
     extensions: ["", ".js",".jsx"],
@@ -16,7 +20,7 @@ const config = {
   //output config
   output: {
     path: buildPath,    //Path of output file
-    filename: 'bundle.js',  //Name of output file
+    filename: '[name].bundle.js',  //Name of output file
   },
   plugins: [
     //Minify the bundle
@@ -31,7 +35,7 @@ const config = {
     //Transfer Files
     new TransferWebpackPlugin([
       {from: 'www'},
-    ], path.resolve(__dirname,"src")),
+    ], path.resolve(__dirname,"src/main/webapp/")),
   ],
   module: {
     loaders: [

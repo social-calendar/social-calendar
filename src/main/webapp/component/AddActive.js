@@ -1,3 +1,5 @@
+//添加活动组件
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -67,7 +69,7 @@ class AddActive extends React.Component{
                     <ListItem 
                         style={listStyle} 
                         leftIcon={<DeviceAccessTime style={iconStyle}/>}
-                        primaryText={<DatePicker hintText="请选择活动开始时间" floatingLabelText="活动开始时间" type="date-time"/>}
+                        primaryText={<DatePicker hintText="请选择活动开始时间" floatingLabelText="活动开始时间"/>}
                     />
 
                     <ListItem 
