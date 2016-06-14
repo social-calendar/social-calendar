@@ -21,8 +21,23 @@ class DateTime extends React.Component{
         this.getDateTime=this.getDateTime.bind(this);
         var now=new Date();
         this.state={
-            date:now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate(),
-            time:now.getHours()+":"+now.getMinutes()
+            date:this.formate(now,'date'),
+            time:this.formate(now,'time')
+        }
+    }
+    //数字填充，使之保持2位
+    number2(num){
+        if (num<10) {
+            return '0'+num;
+        }else{
+            return num;
+        }
+    }
+    formate(data,type){
+        if (type==='date') {
+            return data.getFullYear()+"-"+this.number2((data.getMonth()+1))+"-"+this.number2(data.getDate());
+        }else if (type==='time') {
+            return this.number2(data.getHours())+":"+this.number2(data.getMinutes());
         }
     }
     handleTextFocus(event){
@@ -33,12 +48,12 @@ class DateTime extends React.Component{
     }
     handleDateChange(event,date){
         this.setState({
-            date:date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()
+            date:this.formate(date,'date')
         });
     }
     handleTimeChange(event,time){
         this.setState({
-            time:time.getHours()+":"+time.getMinutes()
+            time:this.formate(time,'time')
         });
     }
     handleDateDismiss(event){
@@ -51,6 +66,7 @@ class DateTime extends React.Component{
                     onFocus={this.handleTextFocus} 
                     value={this.getDateTime()}
                     id="dateTime"
+                    floatingLabelText={this.props.floatingText}
                 />
                 <DatePicker hintText="开始日期" 
                     ref="myDate"
@@ -71,7 +87,7 @@ class DateTime extends React.Component{
 
 ReactDOM.render(
     <MuiThemeProvider muiTheme={MyTheme} >
-        <DateTime />
+        <DateTime floatingText="时间日期"/>
     </MuiThemeProvider>,
     document.getElementById('test')
 );
