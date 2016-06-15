@@ -1,15 +1,13 @@
 // 时间日期选择器组件
+/*
+@param floatingText 浮动文本内容
+*/
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import TextField from 'material-ui/TextField';
-import MyTheme from './MyTheme.js';
-
-injectTapEventPlugin();
 
 class DateTime extends React.Component{
     constructor(props){
@@ -85,9 +83,4 @@ class DateTime extends React.Component{
     }
 };
 
-ReactDOM.render(
-    <MuiThemeProvider muiTheme={MyTheme} >
-        <DateTime floatingText="时间日期"/>
-    </MuiThemeProvider>,
-    document.getElementById('test')
-);
+export default DateTime;

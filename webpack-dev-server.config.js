@@ -7,11 +7,13 @@ const TransferWebpackPlugin = require('transfer-webpack-plugin');
 const config = {
   //Entry points to the project
   entry: {
-    //'webpack/hot/dev-server',
-    //'webpack/hot/only-dev-server',
+    // 'webpack/hot/dev-server',
+    // 'webpack/hot/only-dev-server',
     home:path.join(__dirname, '/src/main/webapp/component/ActiveList.js'),
     add:path.join(__dirname, '/src/main/webapp/component/AddActive.js'),
-    test:path.join(__dirname, '/src/main/webapp/component/DateTime.js'),
+    detail:path.join(__dirname, '/src/main/webapp/component/ActiveDetail.js'),
+
+    // test:path.join(__dirname, '/src/main/webapp/component/DateTime.js'),
 
   },
   //Config options on how to interpret requires imports

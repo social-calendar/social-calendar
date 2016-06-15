@@ -6,6 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import MyTheme from './MyTheme.js';
+import DateTime from './DateTime.js';
+
 
 //引入的组件
 import TextField from 'material-ui/TextField';
@@ -69,7 +71,7 @@ class AddActive extends React.Component{
                     <ListItem 
                         style={listStyle} 
                         leftIcon={<DeviceAccessTime style={iconStyle}/>}
-                        primaryText={<DatePicker hintText="请选择活动开始时间" floatingLabelText="活动开始时间"/>}
+                        primaryText={<DateTime  floatingText="活动开始时间"/>}
                     />
 
                     <ListItem 
@@ -106,7 +108,7 @@ class AddActive extends React.Component{
                         <ListItem 
                             style={listStyle} 
                             leftIcon={<DeviceAccessTime style={iconStyle}/>}
-                            primaryText={<TextField hintText="请选择活动结束时间" floatingLabelText="活动结束时间" type="date-time"/>}
+                            primaryText={<DateTime  floatingText="活动结束时间"/>}
                         />
                     </CardText>              
                 </Card>
