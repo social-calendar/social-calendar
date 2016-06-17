@@ -1,4 +1,4 @@
-//添加活动组件
+//编辑活动组件
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -65,7 +65,7 @@ class AddActive extends React.Component{
                     <ListItem
                         style={listStyle} 
                         leftIcon={<NotificationEventNote style={iconStyle}/>}
-                        primaryText={<TextField hintText="请输入活动主题" floatingLabelText="活动主题" />}
+                        primaryText={<TextField hintText="请输入活动主题" floatingLabelText="活动主题" value="去郊游"/>}
                     />
                        
                     <ListItem 
@@ -77,12 +77,12 @@ class AddActive extends React.Component{
                     <ListItem 
                         style={listStyle} 
                         leftIcon={<Place style={iconStyle}/>}
-                        primaryText={<TextField hintText="请输入活动地点" floatingLabelText="活动地点"/>}
+                        primaryText={<TextField hintText="请输入活动地点" floatingLabelText="活动地点" value="千岛湖"/>}
                     />
                     <ListItem 
                         style={listStyle}
                         leftIcon={<ActionAssignment style={iconStyle} />}
-                        primaryText={<TextField hintText="请输入活动详情"  floatingLabelText="活动详情" multiLine={true} rowsMax={3}/>}
+                        primaryText={<TextField hintText="请输入活动详情"  floatingLabelText="活动详情" multiLine={true} rowsMax={3} value="去去去"/>}
                     />
                 </Paper>
                 <Card style={styles}>

@@ -36,7 +36,7 @@ const iconStyle={
 };
 const listStyle={
     marginBottom:'-20px',
-    height:100
+    height:100,
 };
 
 const paperStyle={
