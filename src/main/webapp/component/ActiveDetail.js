@@ -14,6 +14,9 @@ import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+
 
 //svg图标
 import ActionAssignment from 'material-ui/svg-icons/action/assignment';
@@ -21,6 +24,12 @@ import DeviceAccessTime from 'material-ui/svg-icons/device/access-time';
 import Place from 'material-ui/svg-icons/maps/place';
 import Notifications from 'material-ui/svg-icons/social/notifications';
 import Share from 'material-ui/svg-icons/social/share';
+import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
+import Edit from 'material-ui/svg-icons/image/edit';
+import Editor from 'material-ui/svg-icons/editor/border-color';
+
+
+
 
 
 
@@ -34,8 +43,15 @@ const avatarStyle={
 };
 
 const shareStyle={
-	marginLeft:50,
+    width:'100%'
+};
+
+const editButton={
+    position:'fixed',
+    right:0,
+    bottom:30,
 }
+
 class ActiveDetail extends React.Component{
 	constructor(props) {
         super(props);
@@ -73,25 +89,47 @@ class ActiveDetail extends React.Component{
 		    			<Avatar src="images/1.jpg" style={avatarStyle}/>   						
 		    			<Avatar src="images/1.jpg" style={avatarStyle}/><br/><br/>   						
     					<RaisedButton 
-    						label="分享给微信好友" 
+    						label="点击右上角分享给微信好友" 
     						primary={true}   
     						icon={<Share/>}
-    						style={shareStyle} 			
-    						/>
+    						style={shareStyle}
+    					/>
 		    		</List>
     			</Paper>
-    			<Paper zDepth={0} style={paperStyle}>
-    				<Card>
-    					<CardHeader
-    						title="活动详情"
-    					/>
-    					<Divider/>
-    					<CardText>
-    						你好好哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
-    						哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
-    					</CardText>
-    				</Card>
-    			</Paper>
+    			
+                <Paper zDepth={0} style={paperStyle}>
+                    <List>
+                            <ListItem 
+                                primaryText="活动讨论(2条讨论)" 
+                                href="comment.html?activeId=123"
+                                rightIcon={<ChevronRight/>}
+                            />
+                            <Divider/>
+                            <ListItem
+                                leftAvatar={<Avatar src="images/1.jpg"/>}
+                                primaryText="小明"
+                                secondaryText="一起去啊，走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走"
+                                secondaryTextLines={2}
+                                rightIcon={<span style={{width:'auto'}}>2016-06-16 17:45</span>}                               
+                            />
+                    </List>
+                </Paper>
+
+                <Paper zDepth={0} >
+                    <Card>
+                        <CardHeader
+                            title="活动详情"
+                        />
+                        <Divider/>
+                        <CardText>
+                            你好好哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+                            哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+                        </CardText>
+                    </Card>
+                </Paper>
+                <FloatingActionButton secondary={true} style={editButton} href="edit.html?activeId=123" linkButton={true}>
+                    <Edit/>
+                </FloatingActionButton>
     		</div>    		
     	)
     }

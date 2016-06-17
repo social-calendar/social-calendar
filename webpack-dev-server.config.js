@@ -12,7 +12,7 @@ const config = {
     home:path.join(__dirname, '/src/main/webapp/component/ActiveList.js'),
     add:path.join(__dirname, '/src/main/webapp/component/AddActive.js'),
     detail:path.join(__dirname, '/src/main/webapp/component/ActiveDetail.js'),
-
+    edit:path.join(__dirname, '/src/main/webapp/component/ActiveEdit.js'),
     // test:path.join(__dirname, '/src/main/webapp/component/DateTime.js'),
 
   },

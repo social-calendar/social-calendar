@@ -36,12 +36,14 @@ const ActiveList=()=>(
                     leftAvatar={<Avatar icon={<ActionAssignment />} backgroundColor={tealA700} />}
                     primaryText="15:30-16:30"
                     secondaryText="去游泳"
+                    href="/detail.html?activeId=123"
                 />
                 <Divider insert={true} />
                 <ListItem
                     leftAvatar={<Avatar icon={<ActionAssignment />} backgroundColor={tealA700} />}
                     primaryText="15:30-16:30"
-                    secondaryText="去游泳"
+                    secondaryText="去郊游"
+                    href="/detail.html?activeId=123"
                 />
             </List>
             <Divider insert={true} />
@@ -51,13 +53,14 @@ const ActiveList=()=>(
                     leftAvatar={<Avatar icon={<ActionAssignment />} backgroundColor={tealA700} />}
                     primaryText="09:30-10:30"
                     secondaryText="去上课"
+                    href="/detail.html?activeId=123"
                 />
             </List>
         </div>
         <FloatingActionButton 
             style={addButtonPos} 
             secondary={true} 
-            href="/addActive.html"
+            href="/add.html"
             linkButton={true}
         >
           <ContentAdd />

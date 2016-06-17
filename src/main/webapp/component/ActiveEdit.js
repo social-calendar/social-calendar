@@ -113,7 +113,7 @@ class AddActive extends React.Component{
                     </CardText>              
                 </Card>
                 <RaisedButton 
-                    label="确定添加" 
+                    label="保存修改" 
                     primary={true} 
                     linkButton={true}
                     href="/detail.html?activeId=123"
@@ -130,5 +130,5 @@ ReactDOM.render(
    <MuiThemeProvider muiTheme={MyTheme}>
     <AddActive />
    </MuiThemeProvider>,
-   document.getElementsByClassName('add')[0] 
+   document.getElementsByClassName('edit')[0] 
 );
