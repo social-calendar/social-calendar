@@ -15,7 +15,7 @@ const config = {
     edit:path.join(__dirname, '/src/main/webapp/component/ActiveEdit.js'),
     comment:path.join(__dirname, '/src/main/webapp/component/ActiveComment.js'),
 
-    // test:path.join(__dirname, '/src/main/webapp/component/DateTime.js'),
+    test:path.join(__dirname, '/src/main/webapp/component/Test.js'),
 
   },
   //Config options on how to interpret requires imports

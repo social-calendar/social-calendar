@@ -8,6 +8,8 @@ import ReactDOM from 'react-dom';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import TextField from 'material-ui/TextField';
+import Formate from './Formate.js';
+
 
 class DateTime extends React.Component{
     constructor(props){
@@ -16,53 +18,55 @@ class DateTime extends React.Component{
         this.handleTextFocus=this.handleTextFocus.bind(this);
         this.handleDateChange=this.handleDateChange.bind(this);
         this.handleTimeChange=this.handleTimeChange.bind(this);
-        this.getDateTime=this.getDateTime.bind(this);
+        this.handleDateTimeChange=this.handleDateTimeChange.bind(this);
+
+
         var now=new Date();
         this.state={
-            date:this.formate(now,'date'),
-            time:this.formate(now,'time')
-        }
-    }
-    //数字填充，使之保持2位
-    number2(num){
-        if (num<10) {
-            return '0'+num;
-        }else{
-            return num;
-        }
-    }
-    formate(data,type){
-        if (type==='date') {
-            return data.getFullYear()+"-"+this.number2((data.getMonth()+1))+"-"+this.number2(data.getDate());
-        }else if (type==='time') {
-            return this.number2(data.getHours())+":"+this.number2(data.getMinutes());
+            date:Formate.formate(now,'date'),
+            time:Formate.formate(now,'time'),
+            dateTime:Formate.formate(now)
         }
     }
     handleTextFocus(event){
         this.refs.myDate.focus();
     }
-    getDateTime(){
-        return this.state.date+" "+this.state.time;
-    }
+
     handleDateChange(event,date){
         this.setState({
-            date:this.formate(date,'date')
+            date:Formate.formate(date,'date')
         });
     }
     handleTimeChange(event,time){
         this.setState({
-            time:this.formate(time,'time')
+            time:Formate.formate(time,'time')
         });
     }
     handleDateDismiss(event){
         this.refs.myTime.focus();
+    }
+    handleDateTimeChange(){
+        this.setState({
+            dateTime:this.state.date+" "+this.state.time
+        });
+    }
+    //获取值
+    getValue(){
+        return this.state.dateTime;
+    }
+    //设置值
+    setValue(str){
+        this.setState({
+            dateTime:str
+        });
     }
     render(){
         return (
             <div>
                 <TextField 
                     onFocus={this.handleTextFocus} 
-                    value={this.getDateTime()}
+                    value={this.state.dateTime}
+                    onChange={this.handleDateTimeChange}
                     id="dateTime"
                     floatingLabelText={this.props.floatingText}
                 />
