@@ -1,9 +1,11 @@
 //首页 活动列表
 import React from 'react';
 import ReactDOM from 'react-dom';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
+import MyTheme from './MyTheme.js';
+import Formate from './Formate.js';
 
 import {List, ListItem} from 'material-ui/List';
 import {tealA700} from 'material-ui/styles/colors';
@@ -27,49 +29,68 @@ let addButtonPos={
     bottom:'15%',
     zIndex:999
 }
-const ActiveList=()=>(
-    <div>
-        <div style={{backgroundColor:'white'}}>
-            <List>
-                <Subheader>05月12日 周四</Subheader>
-                <ListItem
-                    leftAvatar={<Avatar icon={<ActionAssignment />} backgroundColor={tealA700} />}
-                    primaryText="15:30-16:30"
-                    secondaryText="去游泳"
-                    href="/detail.html?activeId=123"
-                />
-                <Divider insert={true} />
-                <ListItem
-                    leftAvatar={<Avatar icon={<ActionAssignment />} backgroundColor={tealA700} />}
-                    primaryText="15:30-16:30"
-                    secondaryText="去郊游"
-                    href="/detail.html?activeId=123"
-                />
-            </List>
-            <Divider insert={true} />
-            <List>
-                <Subheader style={{backgroundColor:'#00BFA5',color:'white'}}>今天 05月14日 周六</Subheader>
-                <ListItem
-                    leftAvatar={<Avatar icon={<ActionAssignment />} backgroundColor={tealA700} />}
-                    primaryText="09:30-10:30"
-                    secondaryText="去上课"
-                    href="/detail.html?activeId=123"
-                />
-            </List>
-        </div>
-        <FloatingActionButton 
-            style={addButtonPos} 
-            secondary={true} 
-            href="/add.html"
-            linkButton={true}
-        >
-          <ContentAdd />
-        </FloatingActionButton>
-    </div>
-);
+
+class ActiveList extends React.Component{
+    constructor(props){
+        super(props);
+        this.componentDidMount=this.componentDidMount.bind(this);
+        this.state={
+            data:[]
+        }
+    }
+
+    componentDidMount(){
+        $.get("test/activeInfo.json",function (result) {
+            this.setState({
+                data:result.active
+            });  
+        }.bind(this));
+    }
+
+    render(){
+        return(
+        
+        <div>
+            <div style={{backgroundColor:'white'}}>
+                <List>
+                    {this.state.data.map(function(result,index){
+                          return (
+                            <div key={result.activeId}>
+                                {
+                                    Formate.formate(result.startTime,'date')===Formate.formate(new Date(),'date')?//如果是今天
+                                    <Subheader style={{backgroundColor:'#00BFA5',color:'white'}}>今天 {Formate.formate(new Date(),'date')}</Subheader>
+                                    :
+                                    <Subheader>{Formate.formate(result.startTime,'date')}</Subheader>
+
+                                }
+                                <ListItem
+                                    leftAvatar={<Avatar icon={<ActionAssignment />} backgroundColor={tealA700} />}
+                                    primaryText={Formate.formate(result.startTime,'time')+"-"+Formate.formate(result.endTime,'time')}
+                                    secondaryText={result.activeTheme}
+                                    href={"/detail.html?activeId="+result.activeId}
+                                />
+                                <Divider insert={true} />
+                            </div>
+                          );
+                    })}
+                    
+                </List>
+            </div>
+            <FloatingActionButton 
+                style={addButtonPos} 
+                secondary={true} 
+                href="/add.html"
+                linkButton={true}
+            >
+              <ContentAdd />
+            </FloatingActionButton>
+        </div> 
+        )
+    }
+}
 
 ReactDOM.render(
-   <MuiThemeProvider muiTheme={getMuiTheme()}>
+   <MuiThemeProvider muiTheme={MyTheme}>
     <ActiveList />
    </MuiThemeProvider>,
    document.getElementsByClassName('home')[0] 

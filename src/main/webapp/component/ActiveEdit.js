@@ -27,6 +27,7 @@ import Place from 'material-ui/svg-icons/maps/place';
 import ActionAssignment from 'material-ui/svg-icons/action/assignment';
 import AccessAlarm from 'material-ui/svg-icons/device/access-alarm';
 import Notifications from 'material-ui/svg-icons/social/notifications';
+import TimeOff from 'material-ui/svg-icons/image/timer-off';
 
 injectTapEventPlugin();
 
@@ -71,9 +72,13 @@ class AddActive extends React.Component{
                     <ListItem 
                         style={listStyle} 
                         leftIcon={<DeviceAccessTime style={iconStyle}/>}
-                        primaryText={<DateTime  floatingText="活动开始时间"/>}
+                        primaryText={<DateTime  floatingText="活动开始时间" defaultValue={new Date("2016-06-28 12:02")}/>}
                     />
-
+                    <ListItem 
+                        style={listStyle} 
+                        leftIcon={<TimeOff style={iconStyle}/>}
+                        primaryText={<DateTime  floatingText="活动结束时间" defaultValue={new Date("2016-06-28 13:02")}/>}
+                    />
                     <ListItem 
                         style={listStyle} 
                         leftIcon={<Place style={iconStyle}/>}
@@ -104,11 +109,6 @@ class AddActive extends React.Component{
                                   <MenuItem value={60} primaryText="提前1小时提醒" />
                                 </SelectField>
                             }
-                        />
-                        <ListItem 
-                            style={listStyle} 
-                            leftIcon={<DeviceAccessTime style={iconStyle}/>}
-                            primaryText={<DateTime  floatingText="活动结束时间"/>}
                         />
                     </CardText>              
                 </Card>

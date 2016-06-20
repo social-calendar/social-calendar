@@ -27,6 +27,7 @@ import Place from 'material-ui/svg-icons/maps/place';
 import ActionAssignment from 'material-ui/svg-icons/action/assignment';
 import AccessAlarm from 'material-ui/svg-icons/device/access-alarm';
 import Notifications from 'material-ui/svg-icons/social/notifications';
+import TimeOff from 'material-ui/svg-icons/image/timer-off';
 
 injectTapEventPlugin();
 
@@ -65,10 +66,10 @@ class AddActive extends React.Component{
         var activeInfo={
             activeTheme:this.refs.activeTheme.getValue(),//活动主题            
             startTime:this.refs.startTime.getValue(),//开始时间
+            endTime:this.refs.endTime.getValue(),//结束时间
             place:this.refs.place.getValue(),//地点
             activeDetail:this.refs.activeDetail.getValue(),//活动详情
             alarm:this.state.value,//提醒
-            endTime:this.refs.endTime.getValue(),//结束时间
         }
         console.log(activeInfo);
     }
@@ -87,7 +88,16 @@ class AddActive extends React.Component{
                         leftIcon={<DeviceAccessTime style={iconStyle}/>}
                         primaryText={<DateTime ref="startTime" floatingText="活动开始时间"/>}
                     />
-
+                    <ListItem 
+                        style={listStyle} 
+                        leftIcon={<TimeOff style={iconStyle}/>}
+                        primaryText={
+                            <DateTime 
+                                ref="endTime" 
+                                floatingText="活动结束时间"
+                            />
+                        }
+                    />
                     <ListItem 
                         style={listStyle} 
                         leftIcon={<Place style={iconStyle}/>}
@@ -119,16 +129,7 @@ class AddActive extends React.Component{
                                 </SelectField>
                             }
                         />
-                        <ListItem 
-                            style={listStyle} 
-                            leftIcon={<DeviceAccessTime style={iconStyle}/>}
-                            primaryText={
-                                <DateTime 
-                                    ref="endTime" 
-                                    floatingText="活动结束时间"
-                                />
-                            }
-                        />
+                        
                     </CardText>              
                 </Card>
                 <RaisedButton 
