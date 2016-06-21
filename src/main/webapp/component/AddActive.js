@@ -7,8 +7,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import MyTheme from './MyTheme.js';
 import DateTime from './DateTime.js';
-// import addAjax from '../ajax/add.js';
-
 //引入的组件
 import TextField from 'material-ui/TextField';
 import {List,ListItem} from 'material-ui/List';

@@ -12,6 +12,8 @@ import {tealA700} from 'material-ui/styles/colors';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
+import Paper from 'material-ui/Paper';
+
 import ActionAssignment from 'material-ui/svg-icons/action/assignment';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -51,7 +53,7 @@ class ActiveList extends React.Component{
         return(
         
         <div>
-            <div style={{backgroundColor:'white'}}>
+            <Paper zDepth={0}>
                 <List>
                     {this.state.data.map(function(result,index){
                           return (
@@ -68,14 +70,13 @@ class ActiveList extends React.Component{
                                     primaryText={Formate.formate(result.startTime,'time')+"-"+Formate.formate(result.endTime,'time')}
                                     secondaryText={result.activeTheme}
                                     href={"/detail.html?activeId="+result.activeId}
-                                />
+                                />                                
                                 <Divider insert={true} />
                             </div>
                           );
                     })}
-                    
                 </List>
-            </div>
+            </Paper>
             <FloatingActionButton 
                 style={addButtonPos} 
                 secondary={true} 
