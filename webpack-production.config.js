@@ -6,9 +6,16 @@ const TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 const config = {
   entry: {
+    // 'webpack/hot/dev-server',
+    // 'webpack/hot/only-dev-server',
     home:path.join(__dirname, '/src/main/webapp/component/ActiveList.js'),
     add:path.join(__dirname, '/src/main/webapp/component/AddActive.js'),
-    test:path.join(__dirname, '/src/main/webapp/component/DateTime.js'),
+    detail:path.join(__dirname, '/src/main/webapp/component/ActiveDetail.js'),
+    edit:path.join(__dirname, '/src/main/webapp/component/ActiveEdit.js'),
+    comment:path.join(__dirname, '/src/main/webapp/component/ActiveComment.js'),
+
+    test:path.join(__dirname, '/src/main/webapp/component/Test.js'),
+
   },
   resolve: {
     //When require, do not have to add these extensions to file's name
