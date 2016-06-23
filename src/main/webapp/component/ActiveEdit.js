@@ -116,7 +116,7 @@ class AddActive extends React.Component{
                     label="保存修改" 
                     primary={true} 
                     linkButton={true}
-                    href="/detail.html?activeId=123"
+                    href="detail.html?activeId=123"
                     style={{width:'100%',height:50,fontSize:'20px'}}
                 />
             </div>

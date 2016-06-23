@@ -54,10 +54,8 @@ git config --global user.email "your github's email"
 ```sh
 	npm install
 ```
-2.运行
+2.生成静态文件
 
 ```sh
-npm start
+npm run build
 ```
-3.打开浏览器，输入localhost:1234 查看前端页面
-   按F12跳出开发者工具，点击开发者工具左上角的手机图标可以看到手机上的模拟页面

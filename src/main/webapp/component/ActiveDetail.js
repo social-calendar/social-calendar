@@ -62,7 +62,7 @@ class ActiveDetail extends React.Component{
     			<Paper zDepth={0} style={paperStyle}>
 		    		<List>
 		    			<ListItem
-		    				leftAvatar={<Avatar src="/images/1.jpg" />}
+		    				leftAvatar={<Avatar src="images/1.jpg" />}
 		    				primaryText="小兰"
 		        			secondaryText="创建了活动"
 		    			/>

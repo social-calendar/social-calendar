@@ -18,6 +18,8 @@ import ActionAssignment from 'material-ui/svg-icons/action/assignment';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
+// import ActiveInfo from '../ajax/activeInfo.json';
+
 injectTapEventPlugin();
 
 
@@ -69,7 +71,7 @@ class ActiveList extends React.Component{
                                     leftAvatar={<Avatar icon={<ActionAssignment />} backgroundColor={tealA700} />}
                                     primaryText={Formate.formate(result.startTime,'time')+"-"+Formate.formate(result.endTime,'time')}
                                     secondaryText={result.activeTheme}
-                                    href={"/detail.html?activeId="+result.activeId}
+                                    href={"detail.html?activeId="+result.activeId}
                                 />                                
                                 <Divider insert={true} />
                             </div>
@@ -80,7 +82,7 @@ class ActiveList extends React.Component{
             <FloatingActionButton 
                 style={addButtonPos} 
                 secondary={true} 
-                href="/add.html"
+                href="add.html"
                 linkButton={true}
             >
               <ContentAdd />

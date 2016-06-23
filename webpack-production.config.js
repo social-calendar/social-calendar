@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const buildPath = path.resolve(__dirname, 'build');
+const buildPath = path.resolve(__dirname, 'dist');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
 
@@ -15,7 +15,6 @@ const config = {
     comment:path.join(__dirname, '/src/main/webapp/component/ActiveComment.js'),
 
     test:path.join(__dirname, '/src/main/webapp/component/Test.js'),
-
   },
   resolve: {
     //When require, do not have to add these extensions to file's name
@@ -23,7 +22,7 @@ const config = {
     //node_modules: ["web_modules", "node_modules"]  (Default Settings)
   },
   //Render source-map file for final build
-  devtool: 'source-map',
+  // devtool: 'source-map',
   //output config
   output: {
     path: buildPath,    //Path of output file
@@ -37,6 +36,12 @@ const config = {
         warnings: false,
       },
     }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+
     //Allows error warnings but does not stop compiling. Will remove when eslint is added
     new webpack.NoErrorsPlugin(),
     //Transfer Files
