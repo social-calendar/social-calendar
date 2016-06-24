@@ -19,6 +19,8 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import Snackbar from 'material-ui/Snackbar';
+
 
 // svg图标
 import NotificationEventNote from 'material-ui/svg-icons/notification/event-note';
@@ -52,13 +54,57 @@ class AddActive extends React.Component{
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        this.state = {value: 10};
-    }
+        this.componentDidMount=this.componentDidMount.bind(this);
+        this.handleTouchTap=this.handleTouchTap.bind(this);
+        this.handleRequestClose=this.handleRequestClose.bind(this);
 
+        this.state = {
+            value: 10,
+            open:false,
+            data:{}
+        };
+    }
+    componentDidMount(){
+        $.get("../java/getActiveDetail.jsp",function (data) {
+            this.setState({
+                data:data,
+                value: this.state.data.alarm,//下拉列表值
+            });
+        }.bind(this));
+    }
     handleChange(event,index,value){
-        this.setState({value});
+        this.setState({value:value});
     }
 
+    handleTouchTap(event){
+        var _this=this;
+        $.ajax({
+            type:"POST",
+            url:"../java/editActive.jsp",
+            data:{
+                activeTheme:this.refs.activeTheme.getValue(),//活动主题            
+                startTime:this.refs.startTime.getValue(),//开始时间
+                endTime:this.refs.endTime.getValue(),//结束时间
+                place:this.refs.place.getValue(),//地点
+                activeDetail:this.refs.activeDetail.getValue(),//活动详情
+                alarm:this.state.value,//提醒
+            },
+            success:function (result) {
+               if (result.status===1) {
+                    location.href="detail.html?activeId="+result.activeId;
+               }else{
+                    _this.setState({
+                        open:true
+                    });
+               }
+            }
+        });
+    }
+    handleRequestClose(event){
+        this.setState({
+            open:false
+        });
+    }
     render(){
         return (
             <div>
@@ -66,28 +112,28 @@ class AddActive extends React.Component{
                     <ListItem
                         style={listStyle} 
                         leftIcon={<NotificationEventNote style={iconStyle}/>}
-                        primaryText={<TextField hintText="请输入活动主题" floatingLabelText="活动主题" value="去郊游"/>}
+                        primaryText={<TextField ref="activeTheme" hintText="请输入活动主题" floatingLabelText="活动主题" value={this.state.data.activeTheme}/>}
                     />
                        
                     <ListItem 
                         style={listStyle} 
                         leftIcon={<DeviceAccessTime style={iconStyle}/>}
-                        primaryText={<DateTime  floatingText="活动开始时间" defaultValue={new Date("2016-06-28 12:02")}/>}
+                        primaryText={<DateTime ref="startTime" floatingText="活动开始时间" defaultValue={this.state.data.startTime}/>}
                     />
                     <ListItem 
                         style={listStyle} 
                         leftIcon={<TimeOff style={iconStyle}/>}
-                        primaryText={<DateTime  floatingText="活动结束时间" defaultValue={new Date("2016-06-28 13:02")}/>}
+                        primaryText={<DateTime ref="endTime" floatingText="活动结束时间" defaultValue={this.stat.data.endTime}/>}
                     />
                     <ListItem 
                         style={listStyle} 
                         leftIcon={<Place style={iconStyle}/>}
-                        primaryText={<TextField hintText="请输入活动地点" floatingLabelText="活动地点" value="千岛湖"/>}
+                        primaryText={<TextField ref="place" hintText="请输入活动地点" floatingLabelText="活动地点" value={this.state.data.place}/>}
                     />
                     <ListItem 
                         style={listStyle}
                         leftIcon={<ActionAssignment style={iconStyle} />}
-                        primaryText={<TextField hintText="请输入活动详情"  floatingLabelText="活动详情" multiLine={true} rowsMax={3} value="去去去"/>}
+                        primaryText={<TextField ref="activeDetail" hintText="请输入活动详情"  floatingLabelText="活动详情" multiLine={true} rowsMax={3} value={this.state.data.activeDetail}/>}
                     />
                 </Paper>
                 <Card style={styles}>
@@ -115,9 +161,14 @@ class AddActive extends React.Component{
                 <RaisedButton 
                     label="保存修改" 
                     primary={true} 
-                    linkButton={true}
-                    href="detail.html?activeId=123"
+                    onTouchTap={this.handleTouchTap}
                     style={{width:'100%',height:50,fontSize:'20px'}}
+                />
+                <Snackbar
+                  open={this.state.open}
+                  message="发生错误，请重试!"
+                  autoHideDuration={2500}
+                  onRequestClose={this.handleRequestClose}
                 />
             </div>
         );

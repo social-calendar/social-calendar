@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import MyTheme from './MyTheme.js';
+import Formate from './Formate.js';
 
 import Paper from 'material-ui/Paper';
 import {List, ListItem} from 'material-ui/List';
@@ -28,12 +29,6 @@ import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 import Edit from 'material-ui/svg-icons/image/edit';
 import Editor from 'material-ui/svg-icons/editor/border-color';
 
-
-
-
-
-
-
 const paperStyle={
     marginBottom:20,
 };
@@ -55,6 +50,16 @@ const editButton={
 class ActiveDetail extends React.Component{
 	constructor(props) {
         super(props);
+        this.componentDidMount=this.componentDidMount.bind(this);
+
+        this.state={
+            data:{}
+        }
+    }
+    componentDidMount(){
+        $.gte("../java/getActiveDetail.jsp",function (result) {
+            this.setState({data:result});
+        }.bind(this));
     }
     render(){
     	return(
@@ -62,32 +67,34 @@ class ActiveDetail extends React.Component{
     			<Paper zDepth={0} style={paperStyle}>
 		    		<List>
 		    			<ListItem
-		    				leftAvatar={<Avatar src="images/1.jpg" />}
-		    				primaryText="小兰"
+		    				leftAvatar={<Avatar src={this.state.data.authorAvatar} />}
+		    				primaryText={this.state.data.author}
 		        			secondaryText="创建了活动"
 		    			/>
 		    			<Divider/>
 		    			<ListItem
 		    				leftIcon={<ActionAssignment />}
-		    				primaryText="去郊游"
+		    				primaryText={this.state.data.activeTheme}
 		    			/>
 		    			<ListItem 
 		    				leftIcon={<DeviceAccessTime/>}
-		    				primaryText="2016-06-16 15:30-16:30"
+		    				primaryText={this.state.data.startTime+"-"+Formate.formate(this.state.data.endTime,'time')}
 		    			/>
 		    			<ListItem
 		    				leftIcon={<Place/>}
-		    				primaryText="千岛湖"
+		    				primaryText={this.state.data.place}
 		    			/>
 		    			<ListItem
 		    				leftIcon={<Notifications/>}
-		    				primaryText="提前10分钟提醒"
+		    				primaryText={"提前"+this.state.data.alarm+"分钟提醒"}
 		    			/>	
 		    			<Divider/>
-		    			<ListItem primaryText="共3人参加了活动" style={{fontSize:'12px'}}/>		    			
-		    			<Avatar src="images/1.jpg" style={avatarStyle}/>   						
-		    			<Avatar src="images/1.jpg" style={avatarStyle}/>   						
-		    			<Avatar src="images/1.jpg" style={avatarStyle}/><br/><br/>   						
+		    			<ListItem primaryText={"共"+this.state.data.partInNum+"人参加了活动"} style={{fontSize:'12px'}}/>		    			
+		    			{
+                            this.state.data.AvatarArray.map(function (imgURL) {
+                                return <Avatar src={imgURL} style={avatarStyle}/>   
+                            })
+                        }					
     					<RaisedButton 
     						label="点击右上角分享给微信好友" 
     						primary={true}   
@@ -100,18 +107,28 @@ class ActiveDetail extends React.Component{
                 <Paper zDepth={0} style={paperStyle}>
                     <List>
                             <ListItem 
-                                primaryText="活动讨论(2条讨论)" 
-                                href="comment.html?activeId=123"
+                                primaryText={"活动讨论("+this.state.data.commentLength+"条讨论)"} 
+                                href={"comment.html?activeId="+this.state.data.activeId}
                                 rightIcon={<ChevronRight/>}
                             />
                             <Divider/>
-                            <ListItem
-                                leftAvatar={<Avatar src="images/1.jpg"/>}
-                                primaryText="小明"
-                                secondaryText="一起去啊，走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走走"
-                                secondaryTextLines={2}
-                                rightIcon={<span style={{width:'auto'}}>2016-06-16 17:45</span>}                               
-                            />
+                            {
+                                this.state.data.commentList.map(function (comment) {
+                                   return(
+                                        <div>
+                                            <ListItem
+                                                leftAvatar={<Avatar src={comment.userAvatar}/>}
+                                                primaryText={comment.userName}
+                                                secondaryText={comment.content}
+                                                secondaryTextLines={2}
+                                                rightIcon={<span style={{width:'auto'}}>{comment.time}</span>}                               
+                                            />
+                                            <Divider/>
+                                        </div>
+                                    )
+                                })
+                            }
+                            
                     </List>
                 </Paper>
 
@@ -122,12 +139,11 @@ class ActiveDetail extends React.Component{
                         />
                         <Divider/>
                         <CardText>
-                            你好好哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
-                            哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+                            {this.state.data.activeDetail}
                         </CardText>
                     </Card>
                 </Paper>
-                <FloatingActionButton secondary={true} style={editButton} href="edit.html?activeId=123" linkButton={true}>
+                <FloatingActionButton secondary={true} style={editButton} href={"edit.html?activeId="+this.state.data.activeId} linkButton={true}>
                     <Edit/>
                 </FloatingActionButton>
     		</div>    		

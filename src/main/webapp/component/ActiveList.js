@@ -18,8 +18,6 @@ import ActionAssignment from 'material-ui/svg-icons/action/assignment';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-// import ActiveInfo from '../ajax/activeInfo.json';
-
 injectTapEventPlugin();
 
 
@@ -39,14 +37,16 @@ class ActiveList extends React.Component{
         super(props);
         this.componentDidMount=this.componentDidMount.bind(this);
         this.state={
-            data:[]
+            data:[],
+            status:0
         }
     }
 
     componentDidMount(){
-        $.get("test/activeInfo.json",function (result) {
+        $.get("../java/getActiveList.jsp",function (result) {
             this.setState({
-                data:result.active
+                data:result.data,
+                status:result.status
             });  
         }.bind(this));
     }

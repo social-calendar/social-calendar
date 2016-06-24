@@ -17,6 +17,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import Snackbar from 'material-ui/Snackbar';
 
 // svg图标
 import NotificationEventNote from 'material-ui/svg-icons/notification/event-note';
@@ -50,26 +51,46 @@ class AddActive extends React.Component{
     constructor(props) {
         super(props);
         this.handleSelectChange = this.handleSelectChange.bind(this);
-        this.handleClick=this.handleClick.bind(this);
+        this.handleTouchTap=this.handleTouchTap.bind(this);
+        this.handleRequestClose=this.handleRequestClose.bind(this);
         this.state = {
             value: 10,
+            open:false
         };
     }
 
     handleSelectChange(event,index,value){
-        this.setState({value});
+        this.setState({value:value});
     }
 
-    handleClick(event){
-        var activeInfo={
-            activeTheme:this.refs.activeTheme.getValue(),//活动主题            
-            startTime:this.refs.startTime.getValue(),//开始时间
-            endTime:this.refs.endTime.getValue(),//结束时间
-            place:this.refs.place.getValue(),//地点
-            activeDetail:this.refs.activeDetail.getValue(),//活动详情
-            alarm:this.state.value,//提醒
-        }
-        console.log(activeInfo);
+    handleTouchTap(event){
+        var _this=this;
+        $.ajax({
+            type:"POST",
+            url:"../java/newActive.jsp",
+            data:{
+                activeTheme:this.refs.activeTheme.getValue(),//活动主题            
+                startTime:this.refs.startTime.getValue(),//开始时间
+                endTime:this.refs.endTime.getValue(),//结束时间
+                place:this.refs.place.getValue(),//地点
+                activeDetail:this.refs.activeDetail.getValue(),//活动详情
+                alarm:this.state.value,//提醒
+            },
+            success:function (result) {
+               if (result.status===1) {
+                    location.href="detail.html?activeId="+result.activeId;
+               }else{
+                    _this.setState({
+                        open:true
+                    });
+               }
+            }
+        });
+    }
+    handleRequestClose(event){
+        this.setState({
+            open:false
+        });
     }
     render(){
         return (
@@ -133,10 +154,14 @@ class AddActive extends React.Component{
                 <RaisedButton 
                     label="确定添加" 
                     primary={true} 
-                    // linkButton={true}
-                    // href="/detail.html?activeId=123"
                     style={{width:'100%',height:50,fontSize:'20px'}}
-                    onClick={this.handleClick}
+                    onTouchTap={this.handleTouchTap}
+                />
+                <Snackbar
+                  open={this.state.open}
+                  message="发生错误，请重试!"
+                  autoHideDuration={2500}
+                  onRequestClose={this.handleRequestClose}
                 />
             </div>
         );
