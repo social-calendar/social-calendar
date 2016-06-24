@@ -1,0 +1,53 @@
+{
+	"active":[
+		{
+			"activeId":1,
+			"author":"小兰",
+			"activeTheme":"去露营",
+			"startTime":"2016-06-22 09:00",
+			"endTime":"2016-06-22 16:00",
+			"place":"森林公园",
+			"activeDetail":"在学校大门集合",
+			"alarm":10
+		},
+		{
+			"activeId":2,
+			"author":"小明",
+			"activeTheme":"去唱歌",
+			"startTime":"2016-06-21 18:30",
+			"endTime":"2016-06-21 21:30",
+			"place":"好声音KTV",
+			"activeDetail":"可以带家属，我请客",
+			"alarm":30
+		},
+		{
+			"activeId":3,
+			"author":"小玲",
+			"activeTheme":"聚餐",
+			"startTime":"2016-06-25 18:30",
+			"endTime":"2016-06-25 21:30",
+			"place":"幸福小镇",
+			"activeDetail":"带上钱，AA",
+			"alarm":15
+		}
+	],
+	"comment":[
+		{
+			"commentId":1,
+			"activeId":1,
+			"author":"小红",
+			"commentDetail":"我早就想去了，千岛湖好棒"
+		},
+		{
+			"commentId":2,
+			"activeId":1,
+			"author":"小花",
+			"commentDetail":"虽然千岛湖很美，可是可不可以晚点出发，9点起不来啊！"
+		},{
+			"commentId":3,
+			"activeId":3,
+			"author":"大白",
+			"commentDetail":"幸福小镇辣么贵，AA吃不起啊"
+		}
+	]
+}
