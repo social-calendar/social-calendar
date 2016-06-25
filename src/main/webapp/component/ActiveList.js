@@ -43,7 +43,7 @@ class ActiveList extends React.Component{
     }
 
     componentDidMount(){
-        $.get("../java/getActiveList.jsp",function (result) {
+        $.get("../java/getActiveList.do",function (result) {
             this.setState({
                 data:result.data,
                 status:result.status

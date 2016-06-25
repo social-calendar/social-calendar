@@ -57,7 +57,7 @@ class ActiveDetail extends React.Component{
         }
     }
     componentDidMount(){
-        $.gte("../java/getActiveDetail.jsp",function (result) {
+        $.gte("../java/getActiveDetail.do",function (result) {
             this.setState({data:result});
         }.bind(this));
     }

@@ -35,7 +35,7 @@ class ActiveComment extends React.Component{
 	}
 
 	componentDidMount(){
-		$.get("../java/getComment.jsp",function (result) {
+		$.get("../java/getComment.do",function (result) {
 			this.setState({data:result});
 		}.bind(this));
 	}
@@ -43,7 +43,7 @@ class ActiveComment extends React.Component{
 		var _this=this;
 		$.ajax({
 			type:"POST",
-			url:'../java/saveComment.jsp',
+			url:'../java/saveComment.do',
 			data:{
 				conent:_this.refs.content.getValue(),
 				time:Formate.formate(new Date()),

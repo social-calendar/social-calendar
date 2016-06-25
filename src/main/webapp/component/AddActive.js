@@ -67,7 +67,7 @@ class AddActive extends React.Component{
         var _this=this;
         $.ajax({
             type:"POST",
-            url:"../java/newActive.jsp",
+            url:"../java/newActive.do",
             data:{
                 activeTheme:this.refs.activeTheme.getValue(),//活动主题            
                 startTime:this.refs.startTime.getValue(),//开始时间

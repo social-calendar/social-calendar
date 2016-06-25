@@ -65,7 +65,7 @@ class AddActive extends React.Component{
         };
     }
     componentDidMount(){
-        $.get("../java/getActiveDetail.jsp",function (data) {
+        $.get("../java/getActiveDetail.do",function (data) {
             this.setState({
                 data:data,
                 value: this.state.data.alarm,//下拉列表值
@@ -80,7 +80,7 @@ class AddActive extends React.Component{
         var _this=this;
         $.ajax({
             type:"POST",
-            url:"../java/editActive.jsp",
+            url:"../java/editActive.do",
             data:{
                 activeTheme:this.refs.activeTheme.getValue(),//活动主题            
                 startTime:this.refs.startTime.getValue(),//开始时间
