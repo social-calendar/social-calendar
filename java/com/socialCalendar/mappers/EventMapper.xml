@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.socialCalendar.dao.EventDao">
+    
+    <!-- 先定义一个Interface，UserMapper，然后Mapper文件的namespace指向的就是这个Interface，
+         UserInterface里定义的方法和UserMapper.xml文件中的一样, 
+      	  然后代码里直接使用接口 
+    -->    
+    <resultMap type="Event" id="eventUserResultMap"> 
+        <id property="id" column="event_id" />
+        <result property="title" column="event_title" />
+        <result property="startDate" column="event_startDate" />
+        <result property="endDate" column="event_endDate" />
+        <result property="maxPeople" column="event_maxPeople" />
+        <result property="tag" column="event_tag" />
+        <result property="place" column="event_place" />
+        <result property="content" column="event_content" />
+        <result property="state" column="event_state" />    
+        <result property="promoterID" column="event_promoterID" />  
+    </resultMap>
+    	<!-- 定义活动详情集(参与者映射)映射信息 -->
+    <resultMap type="Event" id="eventUserDetailResultMap" extends="eventUserResultMap">
+    	<collection property="eventDetails" ofType="com.socialCalendar.pojo.EventDetail">
+    		<id property="eventDetailID" column="event_detail_id"/>
+        	<result property="eventID" column="event_id"/>
+        	<result property="participantID" column="event_participantID"/>
+        	<result property="isPromoter" column="event_isPromoter"/>
+        	 	<!-- 配置用户(参与人)映射信息 -->
+        	<association property="participant" javaType="com.socialCalendar.pojo.User" >
+        		<id property="id" column="user_id"/>
+        		<result property="openID" column="user_openID"/>
+        		<result property="nickname" column="user_nickname"/>
+        		<result property="sex" column="user_sex"/>
+        		<result property="headimgurl" column="user_headimgurl"/>
+        		<result property="subscribe" column="user_subscribe"/>
+        		<result property="subscribeTime" column="user_subscribe_time"/>
+        	</association>
+    	</collection>
+    </resultMap>
+    	
+    	<!-- 活动详情查询(包括参与人)_按各种条件集合查询 -->
+    <select id="findDetailEvent" parameterType="Map" resultMap="eventUserDetailResultMap">
+        select * from event_attribute,user_wechat,event_detail
+        <where>
+        		AND	event_detail.event_id = event_attribute.event_id
+				AND user_wechat.user_id = event_detail.event_participantID
+        	<if test="nickname!=null and nickname!='' ">
+               	AND user_wechat.user_nickname like #{nickname}
+            </if>
+        	<if test="id!=null and id!=0">
+               	AND event_attribute.event_id = #{id}
+            </if>
+        	<if test="event_isPromoter!=null and isPromoter!=0">
+               	AND event_detail.event_isPromoter = #{isPromoter}
+            </if>
+            <if test="title!=null and title!='' ">
+               	AND event_attribute.event_title like #{title}
+            </if>
+            <if test="place!=null and place!='' ">
+               	AND event_attribute.event_place like #{place}
+            </if>
+            <if test="content!=null and content!='' ">
+               	AND event_attribute.event_content like #{content}
+            </if>
+            <if test="tag!=null and tag!='' ">
+               	AND event_attribute.event_tag like #{tag}
+            </if>
+            <if test="startDate!=null">
+               	AND event_attribute.event_startDate like #{startDate}
+            </if>
+            <if test="endDate!=null">
+               	AND event_attribute.event_endDate like #{endDate}
+            </if>
+            <if test="maxPeople!=0 and maxPeople!=null">
+               	AND event_attribute.event_maxPeople = #{maxPeople}
+            </if>
+            <if test="state!=0 and state!=null">
+               	AND event_attribute.event_state = #{state}
+            </if>
+            <if test="participantID!=0 and participantID!=null">
+               	AND event_detail.event_participantID = #{participantID}
+            </if>
+        </where>
+    </select>
+    	<!-- 活动添加 -->
+    <insert id="addEvent" useGeneratedKeys="true" keyProperty="id" parameterType="Event" >
+        insert into event_attribute values(null,#{title},
+        #{startDate},#{endDate},#{maxPeople},#{tag},#{content},
+        #{state},#{promoterID},#{place})
+    </insert> 
+       <!-- 活动修改 -->
+    <update id="updateEvent" parameterType="Event">
+        update event_attribute
+        <set>
+            <if test="title != null and title != ''">event_title = #{title},</if>
+            <if test="startDate != null and startDate != ''">event_startDate = #{startDate},</if>
+            <if test="endDate != null and endDate != ''">event_endDate = #{endDate},</if>
+            <if test="maxPeople != null and maxPeople !=0">event_maxPeople = #{maxPeople},</if>
+            <if test="tag != null and tag != ''">event_tag = #{tag},</if>
+            <if test="place != null and place != ''">event_place = #{place},</if>
+            <if test="content != null and content != ''">event_content = #{content},</if>
+            <if test="state != null and state !=0">event_state = #{state},</if>
+            <if test="promoterID != null and promoterID !=0">event_promoterID = #{promoterID},</if>
+        </set>
+        where event_id = #{id}
+    </update>
+    
+   	  <!-- 活动删除 -->
+    <delete id="deleteEvent" parameterType="Integer">
+        delete from event_attribute where event_id = #{id}
+    </delete>
+    
+       <!-- 加入活动 -->
+    <insert id="joinEvent" parameterType="EventDetail" >
+        insert into event_detail values(null,#{eventID},#{participantID},#{isPromoter})
+    </insert>
+       <!-- 退出活动 -->
+    <insert id="quitEvent" parameterType="EventDetail" >
+         delete from event_attribute where event_id = 
+         #{id} AND event_participantID = #{participantID} AND #{isPromoter} = 0
+    </insert>
+    
+</mapper>
