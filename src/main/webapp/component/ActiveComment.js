@@ -44,6 +44,7 @@ class ActiveComment extends React.Component{
 		$.ajax({
 			type:"POST",
 			url:'../java/saveComment.do',
+			contentType:"application/json; charset=utf-8",
 			data:{
 				conent:_this.refs.content.getValue(),
 				time:Formate.formate(new Date()),
