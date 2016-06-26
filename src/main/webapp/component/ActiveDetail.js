@@ -59,13 +59,22 @@ class ActiveDetail extends React.Component{
         }
     }
     componentDidMount(){
-        $.get("../java/getActiveDetail.do",function (result) {
-            this.setState({
-                data:result,
-                commentList:result.commentList,
-                AvatarArray:result.AvatarArray
-            });
-        }.bind(this));
+        var _this=this;
+        $.ajax({
+            url:"../java/getActiveDetail.do",
+            type:'GET',
+            dataType:'json',
+            success:function (result) {
+                _this.setState({
+                    data:result,
+                    commentList:result.commentList,
+                    AvatarArray:result.AvatarArray
+                });
+            },
+            error:function (xhr,error) {
+                console.log(error);
+            }
+        });
     }
     render(){
     	return(
