@@ -18,15 +18,17 @@ class DateTime extends React.Component{
         this.handleTextFocus=this.handleTextFocus.bind(this);
         this.handleDateChange=this.handleDateChange.bind(this);
         this.handleTimeChange=this.handleTimeChange.bind(this);
-
         this.getValue=this.getValue.bind(this);
 
+        // this.defaultProps={
+        //     defaultValue:new Date()
+        // }
         this.state={
             date:Formate.formate(this.props.defaultValue,'date'),
             time:Formate.formate(this.props.defaultValue,'time'),
         }
+       
     }
-    
     handleTextFocus(event){
         this.refs.myDate.focus();
     }

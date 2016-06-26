@@ -18,6 +18,7 @@ import IconButton from 'material-ui/IconButton';
 import {tealA700} from 'material-ui/styles/colors';
 import Snackbar from 'material-ui/Snackbar';
 
+injectTapEventPlugin();
 
 //svg图标
 import ContentSend from 'material-ui/svg-icons/content/send';
@@ -30,14 +31,14 @@ class ActiveComment extends React.Component{
         this.handleRequestClose=this.handleRequestClose.bind(this);
 		this.state={
 			open:false,
-			data:{}
+			data:[]
 		}
 	}
 
 	componentDidMount(){
-		$.get("../java/getComment.do",function (result) {
-			this.setState({data:result});
-		}.bind(this));
+        $.get("../java/getComment.do",function (result) {
+            this.setState({data:result.commentList});
+        }.bind(this));
 	}
 	handleTouchTap () {
 		var _this=this;
@@ -73,9 +74,9 @@ class ActiveComment extends React.Component{
 				<Paper zDepth={0}>
 					<List>
 						{
-							this.state.data.map(function (comment) {
+							this.state.data.map(function (comment,index) {
 							 	return(
-							 		<div>
+							 		<div key={index}>
 							 			<ListItem
                                             leftAvatar={<Avatar src={comment.userAvatar}/>}
                                             primaryText={comment.userName}

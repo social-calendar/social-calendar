@@ -7,6 +7,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import MyTheme from './MyTheme.js';
 import DateTime from './DateTime.js';
+import Formate from './Formate.js';
 
 
 //引入的组件
@@ -54,21 +55,21 @@ class AddActive extends React.Component{
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        this.componentDidMount=this.componentDidMount.bind(this);
+        this.componentWillMount=this.componentWillMount.bind(this);
         this.handleTouchTap=this.handleTouchTap.bind(this);
         this.handleRequestClose=this.handleRequestClose.bind(this);
-
-        this.state = {
+            this.state = {
             value: 10,
             open:false,
-            data:{}
+            data:{},
         };
+        var _this=this;
     }
-    componentDidMount(){
-        $.get("../java/getActiveDetail.do",function (data) {
+    componentWillMount(){
+        $.get("../java/getActiveDetail.don",function (result) {
             this.setState({
-                data:data,
-                value: this.state.data.alarm,//下拉列表值
+                data:result,
+                value: result.alarm,//下拉列表值
             });
         }.bind(this));
     }
@@ -124,7 +125,7 @@ class AddActive extends React.Component{
                     <ListItem 
                         style={listStyle} 
                         leftIcon={<TimeOff style={iconStyle}/>}
-                        primaryText={<DateTime ref="endTime" floatingText="活动结束时间" defaultValue={this.stat.data.endTime}/>}
+                        primaryText={<DateTime ref="endTime" floatingText="活动结束时间" defaultValue={this.state.data.endTime}/>}
                     />
                     <ListItem 
                         style={listStyle} 

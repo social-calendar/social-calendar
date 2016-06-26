@@ -53,12 +53,18 @@ class ActiveDetail extends React.Component{
         this.componentDidMount=this.componentDidMount.bind(this);
 
         this.state={
-            data:{}
+            data:{},
+            commentList:[],
+            AvatarArray:[]
         }
     }
     componentDidMount(){
         $.get("../java/getActiveDetail.do",function (result) {
-            this.setState({data:result});
+            this.setState({
+                data:result,
+                commentList:result.commentList,
+                AvatarArray:result.AvatarArray
+            });
         }.bind(this));
     }
     render(){
@@ -91,8 +97,8 @@ class ActiveDetail extends React.Component{
 		    			<Divider/>
 		    			<ListItem primaryText={"共"+this.state.data.partInNum+"人参加了活动"} style={{fontSize:'12px'}}/>		    			
 		    			{
-                            this.state.data.AvatarArray.map(function (imgURL) {
-                                return <Avatar src={imgURL} style={avatarStyle}/>   
+                            this.state.AvatarArray.map(function (imgURL,index) {
+                                return <Avatar key={new Date()+index} src={imgURL} style={avatarStyle}/>   
                             })
                         }					
     					<RaisedButton 
@@ -113,17 +119,17 @@ class ActiveDetail extends React.Component{
                             />
                             <Divider/>
                             {
-                                this.state.data.commentList.map(function (comment) {
+                                this.state.commentList.map(function (comment,index) {
                                    return(
-                                        <div>
-                                            <ListItem
+                                        <div key={index}>
+                                            <ListItem                                               
                                                 leftAvatar={<Avatar src={comment.userAvatar}/>}
                                                 primaryText={comment.userName}
                                                 secondaryText={comment.content}
                                                 secondaryTextLines={2}
                                                 rightIcon={<span style={{width:'auto'}}>{comment.time}</span>}                               
                                             />
-                                            <Divider/>
+                                            <Divider />
                                         </div>
                                     )
                                 })

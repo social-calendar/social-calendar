@@ -8,7 +8,7 @@ export default{
 	    }
 	},
 	formate(data,type=" "){//数据 类型
-		if (typeof data !="object") {
+		if (typeof data!==Date) {
 			data=new Date(data);
 		}
 		var time=this.number2(data.getHours())+":"+this.number2(data.getMinutes());

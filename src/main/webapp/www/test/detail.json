@@ -1,0 +1,39 @@
+{
+    "commentList": [
+        {
+            "userAvatar": "http://www.diaoge.com", 
+            "userName": "王小调", 
+            "content": "觉得自习活动一很好玩——王小调评论", 
+            "time": "2016-06-07 16:17:54.0"
+        }, 
+        {
+            "userAvatar": "http://www.diaoge.com", 
+            "userName": "王小调", 
+            "content": "觉得自习活动一很好玩——王小调又来评论咯评论", 
+            "time": "2016-06-24 16:18:34.0"
+        }, 
+        {
+            "userAvatar": "http://www.sina.com", 
+            "userName": "贺志凯", 
+            "content": "觉得自习活动一很好玩——贺志凯又来评论", 
+            "time": "2016-06-21 16:27:01.0"
+        }
+    ], 
+    "author": "王小调", 
+    "activeId": 1, 
+    "authorAvatar": "http://www.diaoge.com", 
+    "AvatarArray": [
+        "http://www.diaoge.com", 
+        "http://www.sina.com", 
+        "http://www.QQ.com"
+    ], 
+    "activeTheme": "自习", 
+    "alarm": 10, 
+    "startTime": "2016-06-29 00:00:00.0", 
+    "endTime": "2016-06-23 00:00:00.0", 
+    "place": "中南民族大学", 
+    "commentLength": 4, 
+    "partInNum": 3, 
+    "activeDetail": "星期五早上自习室约约约", 
+    "status": 1
+}
