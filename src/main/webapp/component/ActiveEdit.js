@@ -1,4 +1,4 @@
-//编辑活动组件
+﻿//编辑活动组件
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -66,7 +66,7 @@ class AddActive extends React.Component{
         var _this=this;
     }
     componentWillMount(){
-        $.get("../java/getActiveDetail.don",function (result) {
+        $.get("/app/java/getActiveDetail.do"+location.search,function (result) {
             this.setState({
                 data:result,
                 value: result.alarm,//下拉列表值
@@ -81,16 +81,17 @@ class AddActive extends React.Component{
         var _this=this;
         $.ajax({
             type:"POST",
-            url:"../java/editActive.do",
+            url:"/app/java/editActive.do",
             contentType:"application/json; charset=utf-8",
-            data:{
+            data:JSON.stringify({
+		activeId:(location.search.split('='))[1],
                 activeTheme:this.refs.activeTheme.getValue(),//活动主题            
                 startTime:this.refs.startTime.getValue(),//开始时间
                 endTime:this.refs.endTime.getValue(),//结束时间
                 place:this.refs.place.getValue(),//地点
                 activeDetail:this.refs.activeDetail.getValue(),//活动详情
                 alarm:this.state.value,//提醒
-            },
+             }),
             success:function (result) {
                if (result.status===1) {
                     location.href="detail.html?activeId="+result.activeId;

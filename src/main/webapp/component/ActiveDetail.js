@@ -1,4 +1,4 @@
-//活动详情
+﻿//活动详情
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -60,10 +60,10 @@ class ActiveDetail extends React.Component{
     }
     componentDidMount(){
         var _this=this;
+	var activeId = location.search;
         $.ajax({
-            url:"../java/getActiveDetail.do",
+            url:"/app/java/getActiveDetail.do" + activeId,
             type:'GET',
-            dataType:'json',
             success:function (result) {
                 _this.setState({
                     data:result,
@@ -93,7 +93,7 @@ class ActiveDetail extends React.Component{
 		    			/>
 		    			<ListItem 
 		    				leftIcon={<DeviceAccessTime/>}
-		    				primaryText={this.state.data.startTime+"-"+Formate.formate(this.state.data.endTime,'time')}
+		    				primaryText={this.state.data.startTime+"--"+this.state.data.endTime}
 		    			/>
 		    			<ListItem
 		    				leftIcon={<Place/>}

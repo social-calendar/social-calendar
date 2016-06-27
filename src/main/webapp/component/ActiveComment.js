@@ -1,4 +1,4 @@
-//活动讨论组件
+﻿//活动讨论组件
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -36,7 +36,7 @@ class ActiveComment extends React.Component{
 	}
 
 	componentDidMount(){
-        $.get("../java/getComment.do",function (result) {
+        $.get("/app/java/getComment.do" + location.search,function (result) {
             this.setState({data:result.commentList});
         }.bind(this));
 	}
@@ -44,12 +44,13 @@ class ActiveComment extends React.Component{
 		var _this=this;
 		$.ajax({
 			type:"POST",
-			url:'../java/saveComment.do',
+			url:'/app/java/saveComment.do',
 			contentType:"application/json; charset=utf-8",
-			data:{
-				conent:_this.refs.content.getValue(),
+			data:JSON.stringify({
+   				activeId:(location.search.split('='))[1],
+				content:_this.refs.content.getValue(),
 				time:Formate.formate(new Date()),
-			},
+			 }),
 			success:function (result) {
 				if (result.status===1) {
 					//刷新当前页面

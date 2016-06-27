@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.socialCalendar.dao.CommentDao">
+		<!-- 评论信息映射 -->
+    <resultMap type="Comment" id="commentResultMap"> 
+       	<id property="commentID" column="event_comment_id"/>
+        		<result property="commentEventId" column="comment_event_id"/>
+        		<result property="commentUserId" column="comment_user_id"/>
+        		<result property="commentTime" column="comment_time"/>
+        		<result property="commentContent" column="comment_content"/>
+        		<association property="commentUser" javaType="com.socialCalendar.pojo.User" >
+        		<id property="id" column="user_id"/>
+        			<result property="openID" column="user_openID"/>
+        			<result property="nickname" column="user_nickname"/>
+        			<result property="sex" column="user_sex"/>
+        			<result property="headimgurl" column="user_headimgurl"/>
+        			<result property="subscribe" column="user_subscribe"/>
+        			<result property="subscribeTime" column="user_subscribe_time"/>
+        		</association>
+    </resultMap>    
+
+    	<!-- 添加评论 -->
+    <insert id="addComment" parameterType="Comment">
+        insert into event_comment values(null,#{commentTime},
+        #{commentEventId},#{commentUserId},#{commentContent})
+    </insert>
+    	<!-- 删除评论-->
+    <delete id="deleteComment" parameterType="Integer">
+        delete from event_comment where event_comment_id = #{commentID}
+    </delete>
+    	<!-- 修改评论 -->
+    <update id="updateComment" parameterType="Comment">
+        update event_comment
+        <set>
+            <if test="commentUserId != null and commentUserId !=0">comment_user_id = #{commentUserId},</if>
+            <if test="commentEventId != null and commentEventId !=0">comment_event_id = #{commentEventId},</if>
+            <if test="commentTime != null and commentTime != ''">comment_time = #{commentTime},</if>
+            <if test="commentContent != null and commentContent != ''">comment_content = #{commentContent},</if>
+        </set>
+        where event_comment_id = #{commentID}
+    </update>   
+  
+    	<!-- 根据Comment_id查询评论 -->
+    <select id="findCommentByCommentId" parameterType="Integer" resultMap="commentResultMap">
+        select * from event_comment,user_wechat 
+         <where>
+				AND user_wechat.user_id = event_comment.comment_user_id
+               	AND event_comment.event_comment_id = #{commentID}
+         </where>  
+    </select>
+    	
+    	<!-- 根据user_id查询评论 -->
+    <select id="findCommentByUserId" parameterType="Integer" resultMap="commentResultMap">
+        select * from event_comment,user_wechat
+         <where>
+				AND user_wechat.user_id = event_comment.comment_user_id
+		        AND event_comment.comment_user_id = #{commentUserId}
+		</where>
+    </select>
+    
+    	<!-- 根据comment_Content查询评论 -->
+    <select id="findCommentByContent" parameterType="String" resultMap="commentResultMap">
+        select * from event_comment,user_wechat
+         <where>
+				AND user_wechat.user_id = event_comment.comment_user_id
+				AND event_comment.comment_content LIKE #{commentContent}
+		</where>
+    </select>
+    
+        <!-- 根据comment_event_id查询评论 -->
+    <select id="findCommentByEventId" parameterType="Integer" resultMap="commentResultMap">
+        select * from event_comment,user_wechat 
+        <where>
+				AND user_wechat.user_id = event_comment.comment_user_id 
+				AND event_comment.comment_event_id = #{commentEventId}
+		</where>
+		order by event_comment.comment_time DESC
+    </select>        
+</mapper>

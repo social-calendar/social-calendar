@@ -1,4 +1,4 @@
-//添加活动组件
+﻿//添加活动组件
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -67,16 +67,16 @@ class AddActive extends React.Component{
         var _this=this;
         $.ajax({
             type:"POST",
-            url:"../java/newActive.do",
+            url:"/app/java/newActive.do",
             contentType:"application/json; charset=utf-8",
-            data:{
+            data:JSON.stringify({
                 activeTheme:this.refs.activeTheme.getValue(),//活动主题            
                 startTime:this.refs.startTime.getValue(),//开始时间
                 endTime:this.refs.endTime.getValue(),//结束时间
                 place:this.refs.place.getValue(),//地点
                 activeDetail:this.refs.activeDetail.getValue(),//活动详情
                 alarm:this.state.value,//提醒
-            },
+            }),
             success:function (result) {
                if (result.status===1) {
                     location.href="detail.html?activeId="+result.activeId;

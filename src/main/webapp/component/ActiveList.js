@@ -1,4 +1,4 @@
-//首页 活动列表
+﻿//首页 活动列表
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -43,7 +43,7 @@ class ActiveList extends React.Component{
     }
 
     componentDidMount(){
-        $.get("../java/getActiveList.do",function (result) {
+        $.get("/app/java/getActiveList.do",function (result) {
             this.setState({
                 data:result.data,
                 status:result.status
