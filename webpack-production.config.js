@@ -13,6 +13,7 @@ const config = {
     detail:path.join(__dirname, '/src/main/webapp/component/ActiveDetail.js'),
     edit:path.join(__dirname, '/src/main/webapp/component/ActiveEdit.js'),
     comment:path.join(__dirname, '/src/main/webapp/component/ActiveComment.js'),
+    join:path.join(__dirname, '/src/main/webapp/component/JoinActive.js'),
 
     test:path.join(__dirname, '/src/main/webapp/component/Test.js'),
   },

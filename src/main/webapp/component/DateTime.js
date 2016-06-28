@@ -15,7 +15,7 @@ class DateTime extends React.Component{
     constructor(props){
         super(props);
         this.handleDateDismiss=this.handleDateDismiss.bind(this);
-        this.handleTextFocus=this.handleTextFocus.bind(this);
+        this.handleTextClick=this.handleTextClick.bind(this);
         this.handleDateChange=this.handleDateChange.bind(this);
         this.handleTimeChange=this.handleTimeChange.bind(this);
         this.getValue=this.getValue.bind(this);
@@ -29,8 +29,10 @@ class DateTime extends React.Component{
         }
        
     }
-    handleTextFocus(event){
-        this.refs.myDate.focus();
+    handleTextClick(event){
+        //阻止软键盘弹出
+        event.target.blur();
+        this.refs.myDate.focus(); 
     }
 
     handleDateChange(event,date){
@@ -54,7 +56,7 @@ class DateTime extends React.Component{
         return (
             <div>
                 <TextField 
-                    onFocus={this.handleTextFocus} 
+                    onClick={this.handleTextClick} 
                     value={this.getValue()}
                     default={this.props.defaultValue}
                     id="dateTime"
