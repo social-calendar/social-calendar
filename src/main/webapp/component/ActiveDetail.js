@@ -158,9 +158,14 @@ class ActiveDetail extends React.Component{
                         </CardText>
                     </Card>
                 </Paper>
-                <FloatingActionButton secondary={true} style={editButton} href={"edit.html?activeId="+this.state.data.activeId} linkButton={true}>
-                    <Edit/>
-                </FloatingActionButton>
+                {this.state.data.isCreater?
+                    <FloatingActionButton secondary={true} style={editButton} href={"edit.html?activeId="+this.state.data.activeId} linkButton={true}>
+                        <Edit/>
+                    </FloatingActionButton>
+                    :
+                    ''
+                }
+                
     		</div>    		
     	)
     }
