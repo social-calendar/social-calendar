@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
@@ -25,19 +27,21 @@ import com.socialCalendar.dataModel.Activity;
 import com.socialCalendar.dataModel.CommentDetail;
 import com.socialCalendar.pojo.Comment;
 import com.socialCalendar.pojo.Event;
+import com.socialCalendar.pojo.User;
 import com.socialCalendar.service.CommentService;
 import com.socialCalendar.service.EventService;
 import com.socialCalendar.service.UserService;
 
 @Controller
 @RequestMapping("/java")
-public class EventFrontController{
+public class EventFrontController extends BaseController{
 	@Resource(name="commentService")
 	private CommentService commentService;
 	@Resource(name="eventService")
 	private EventService eventService;
 	@Resource(name="userService")
 	private UserService userService;
+	
 	/**
 	 * 1.获取用户个人活动列表
 	 */
@@ -45,12 +49,14 @@ public class EventFrontController{
 	@ResponseBody
 	public Map<String, Object> listEvent()
 			throws Exception {
+		HttpSession session = super.getRequest().getSession();
 		System.out.println("获取用户个人活动列表。getActiveList请求！==========");
+		User user = (User) session.getAttribute("user");
+		System.out.println("getActivi:"+user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Activity> activitys = new ArrayList<Activity>();
-		
-		int status = 2;
-		map.put("participantID","1");
+		int status = 2;	
+		map.put("participantID",user.getId());
 		List<Event> eventList = eventService.findListEvent(map);
 		map.clear();
 		if(eventList!=null){
@@ -59,7 +65,7 @@ public class EventFrontController{
 				activity.setActiveId(eventList.get(i).getId());
 				activity.setActiveTheme(eventList.get(i).getTitle());
 				activity.setStartTime(DateUtil.timestampToStr(eventList.get(i).getStartDate()));
-				activity.setEndTime(DateUtil.timestampToStr(eventList.get(i).getStartDate()));
+				activity.setEndTime(DateUtil.timestampToStr(eventList.get(i).getEndDate()));
 				activitys.add(activity);
 			}
 			status = 1;
@@ -76,7 +82,9 @@ public class EventFrontController{
 	@ResponseBody
 	public Map<String, Object> addEvent(@RequestBody Object event)
 			throws Exception {
-		System.out.println("创建活动。newActive请求！==========");
+		HttpSession session = super.getRequest().getSession();
+		User user = (User) session.getAttribute("user");
+		System.out.println(user.getNickname()+"创建活动。newActive请求！==========");
 		JSONObject json = JSONObject.fromObject(event);
 		Map<String, Object> map = new HashMap<String, Object>();
 		int status = 0, flag = 0;
@@ -87,7 +95,7 @@ public class EventFrontController{
 		events.setPlace(json.getString("place"));
 		events.setContent(json.getString("activeDetail"));
 		events.setAlarm(json.getInt("alarm"));
-		events.setPromoterID(1);
+		events.setPromoterID(user.getId());
 		System.out.println(events);
 		flag = eventService.addEvent(events);
 		if (flag != 0)
@@ -107,7 +115,9 @@ public class EventFrontController{
 	@ResponseBody
 	public Map<String, Object> editEvent(@RequestBody Object event)
 			throws Exception {
-		System.out.println("编辑活动。editActive请求！==========");
+		HttpSession session = super.getRequest().getSession();
+		User user = (User) session.getAttribute("user");
+		System.out.println(user.getNickname()+"编辑活动。editActive请求！==========");
 		JSONObject json = JSONObject.fromObject(event);
 		Map<String, Object> map = new HashMap<String, Object>();
 		int status = 0;
@@ -119,7 +129,7 @@ public class EventFrontController{
 		events.setPlace(json.getString("place"));
 		events.setContent(json.getString("activeDetail"));
 		events.setAlarm(json.getInt("alarm"));
-		events.setPromoterID(1);
+		events.setPromoterID(user.getId());
 		status = eventService.updateEvent(events);
 		map.put("activeId", json.getInt("activeId"));
 		map.put("status", status);
@@ -134,11 +144,14 @@ public class EventFrontController{
 	@ResponseBody
 	public Map<String, Object> detailEvent(@RequestParam("activeId")Integer activeId)
 			throws Exception {
-		System.out.println("活动详情。getActiveDetail请求！==========");
+		HttpSession session = super.getRequest().getSession();
+		User user = (User) session.getAttribute("user");
+		System.out.println(user.getNickname()+"查看活动详情。getActiveDetail请求！==========");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<CommentDetail> commentDetails = new ArrayList<CommentDetail>();
 		List<String> avatarArrays = new ArrayList<String>();
 		int status = 2;
+		boolean isCreater = false;
 		Event event = eventService.findDetailEvent(activeId);
 		List<Comment> comment = commentService.findCommentByEventId(activeId);
 		//装载参与人头像
@@ -162,6 +175,8 @@ public class EventFrontController{
 					else break;
 				}
 			}
+			
+			if(event.getPromoterID()==user.getId())isCreater = true;
 			//装载数据
 			map.put("authorAvatar", userService.findByUserIdUser(event.getPromoterID())
 					.getHeadimgurl());
@@ -178,6 +193,7 @@ public class EventFrontController{
 			map.put("AvatarArray", avatarArrays);
 			map.put("commentList", commentDetails);
 			map.put("commentLength", comment.size());
+			map.put("isCreater",isCreater);
 			map.put("status", status);		
 		}
 		else map.put("status", status);
@@ -191,6 +207,8 @@ public class EventFrontController{
 	@ResponseBody
 	public Map<String, Object> getEventComment(@RequestParam("activeId")Integer activeId)
 			throws Exception {
+		HttpSession session = super.getRequest().getSession();
+		User user = (User) session.getAttribute("user");
 		System.out.println("获取某一活动下的评论。getComment请求！==========");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<CommentDetail> commentList = new ArrayList<CommentDetail>();
@@ -221,13 +239,15 @@ public class EventFrontController{
 	@ResponseBody
 	public Map<String, Object> addEventComment(@RequestBody Object comment)
 			throws Exception {
-		System.out.println("发布评论。saveComment请求！==========");
+		HttpSession session = super.getRequest().getSession();
+		User user = (User) session.getAttribute("user");
+		System.out.println(user.getNickname()+"发布评论。saveComment请求！==========");
 		JSONObject json = JSONObject.fromObject(comment);
 		Map<String, Object> map = new HashMap<String, Object>();
 		int status = 0;
 		Comment comments = new Comment();
 		comments.setCommentEventId(json.getInt("activeId"));
-		comments.setCommentUserId(1);
+		comments.setCommentUserId(user.getId());
 		System.out.println(json.getString("time"));
 		comments.setCommentTime(DateUtil.strToTimestamp(json.getString("time")));
 		comments.setCommentContent(json.getString("content"));

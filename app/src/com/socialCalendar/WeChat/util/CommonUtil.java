@@ -26,10 +26,12 @@ import com.socialCalendar.WeChat.pojo.Token;
  */
 public class CommonUtil {
 	private static Logger log = LoggerFactory.getLogger(CommonUtil.class);
-
+	//社交日历公众号唯一凭证appId
+	public final static String appId = "wx46126c68d98f25b7";
+	//社交日历公众号唯一凭证密钥
+	public final static String appSecret = "629ce902a1b930959e4aabb105c04977";
 	// 凭证获取（GET）
 	public final static String token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
-	
 	/**
 	 * 发送https请求
 	 * 

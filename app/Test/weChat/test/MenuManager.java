@@ -21,6 +21,8 @@ import org.slf4j.LoggerFactory;
  */
 public class MenuManager {
 	private static Logger log = LoggerFactory.getLogger(MenuManager.class);
+	//private static String ApiUrl="http://152m09481l.iask.in/app/wechat/oauth.do";
+	private static String ApiUrl="http://isolarfun.com/app/wechat/oauth.do";
 
 	/**
 	 * 定义菜单结构
@@ -48,7 +50,7 @@ public class MenuManager {
 		btn21.setType("view");
 		btn21.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx46126c68d98f25b7&redirect_uri=http://152m09481l.iask.in/Javen/OauthTest&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
 */
-		ViewButton btn11 = new ViewButton();
+	/*	ViewButton btn11 = new ViewButton();
 		btn11.setName("我的活动");
 		btn11.setType("view");
 		btn11.setUrl("http://social.ngrok.cc/app/build/index.html");
@@ -56,17 +58,44 @@ public class MenuManager {
 		ViewButton btn12 = new ViewButton();
 		btn12.setName("创建活动");
 		btn12.setType("view");
-		btn12.setUrl("http://social.ngrok.cc/app/build/index.html");
+		btn12.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?"
+				+"appid="+CommonUtil.appId+"&redirect_uri=http://social.ngrok.cc/app/wechat/oauth.do"
+				+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"				
+			);
 		
 		ViewButton btn22 = new ViewButton();
 		btn22.setName("精选活动");
 		btn22.setType("view");
-		btn22.setUrl("http://social.ngrok.cc/app/build/add.html");
-
+		btn22.setUrl("http://social.ngrok.cc/app/wechat/oauth.do");
+		*/
+		ViewButton btn11 = new ViewButton();
+		btn11.setName("我的活动");
+		btn11.setType("view");
+		btn11.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?"
+				+"appid="+CommonUtil.appId+"&redirect_uri="+ApiUrl
+				+"&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"
+				);
+		
+		ViewButton btn12 = new ViewButton();
+		btn12.setName("创建活动");
+		btn12.setType("view");
+		btn12.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?"
+				+"appid="+CommonUtil.appId+"&redirect_uri="+ApiUrl
+				+"&response_type=code&scope=snsapi_userinfo&state=2#wechat_redirect"
+				);
+		
+		ClickButton btn22 = new ClickButton();
+		btn22.setName("每日精选");
+		btn22.setType("click");
+		btn22.setKey("day");
+		
 	/*	ViewButton btn23 = new ViewButton();
 		btn23.setName("唯品会");
 		btn23.setType("view");
-		btn23.setUrl("http://m.vipshop.com");
+		btn23.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?"
+					+"appid="+CommonUtil.appId+"&redirect_uri=http://social.ngrok.cc/app/wechat/oauth.do"
+					+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"				
+				);
 
 		ViewButton btn24 = new ViewButton();
 		btn24.setName("当当网");
@@ -119,7 +148,7 @@ public class MenuManager {
 		// 调用接口获取凭证
 		Token token = CommonUtil.getToken(appId, appSecret);
 
-		System.out.println(MenuManager.getUserInfo(token.getAccessToken(),"oFHjkv-aOf41CM1yRa8vosE1BstE"));
+		System.out.println(MenuManager.getUserInfo(token.getAccessToken(),"oFHjkv7tnvjm2vTbU5lQl3a4LNSM"));
 		
 		if (null != token) {
 			// 创建菜单

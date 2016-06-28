@@ -3,6 +3,8 @@ package com.socialCalendar.service;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONObject;
+
 import com.socialCalendar.pojo.User;
 
 public interface UserService {
@@ -46,5 +48,12 @@ public interface UserService {
      * @param 
      * @return 用户集 
      */
-    public List<User> findByNickNameUser(Map<String, Object> map);  
+    public List<User> findByNickNameUser(Map<String, Object> map);
+    
+    /**
+     * 保存或跟新微信userInfo
+     * @param wxUserInfo
+     * @return session存储对象
+     */
+    public User saveOrUpdate(JSONObject wxUserInfo); 
 }

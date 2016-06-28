@@ -97,6 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                	AND event_detail.event_participantID = #{participantID}
             </if>
         </where>
+        order by event_attribute.event_startDate DESC
     </select>
    		<!-- 活动详情查询(包括参与人) -->
     <select id="findDetailEvent" parameterType="Integer" resultMap="eventUserDetailResultMap">

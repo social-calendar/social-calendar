@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>    
 
     	<!-- 添加用户 -->
-    <insert id="addUser" parameterType="User">
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         insert into user_wechat values(null,#{openID},
         #{nickname},#{sex},#{headimgurl},#{subscribe},#{subscribeTime})
     </insert>
