@@ -82,14 +82,19 @@ class JoinActive extends React.Component{
         var _this=this;
         var activeId = location.search;
         $.ajax({
-            url:"/app/java/getActiveDetail.do" + activeId,
+            url:"/app/java/getActiveDetail.do"+activeId,
             type:'GET',
             success:function (result) {
-                _this.setState({
-                    data:result,
-                    commentList:result.commentList,
-                    AvatarArray:result.AvatarArray
-                });
+                if (result.hasJoined) {//如果已经加入活动，就跳到详情页
+                    location.href='detail.html'+activeId;
+                }else{
+                   _this.setState({
+                        data:result,
+                        commentList:result.commentList,
+                        AvatarArray:result.AvatarArray
+                    }); 
+                }
+                
             },
             error:function (xhr,error) {
                 console.log(error);
@@ -98,16 +103,14 @@ class JoinActive extends React.Component{
     }
     handleTouchTap(event){
         var _this=this;
+        var activeId = location.search;
         $.ajax({
             type:"POST",
-            url:"/app/java/joinActive.do",
-            data:{
-                activeId:(location.search.split('='))[1],
-            },
+            url:"/app/java/joinActive.do"+activeId,
             contentType:"application/json; charset=utf-8",
             success:function (result) {
                if (result.status===1) {
-                    location.href="detail.html?activeId="+result.activeId;
+                    location.href="detail.html"+activeId;
                }else{
                     alert('加入失败!');
                }
