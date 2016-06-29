@@ -13,8 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.socialCalendar.pojo.User;
 import com.socialCalendar.service.UserService;
@@ -36,13 +34,16 @@ public class WeChatMenuController {
             HttpServletResponse response) throws IOException, ServletException {
     	request.setCharacterEncoding("UTF-8");
     	response.setCharacterEncoding("UTF-8");
-    	String activteId = request.getParameter("activteId");
-    	User userinfo = userService.findByUserIdUser(Integer.valueOf(activteId));
+    	String activeId = request.getParameter("activeId");
+    	System.out.println("activeId:"+activeId);
+    	User userinfo = userService.findByUserIdUser(11);
     	System.out.println("userInfo:"+userinfo);
-    	HttpSession session = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession();	
+    	HttpSession session = request.getSession();	
     	session.setAttribute("user", userinfo);
-    	response.sendRedirect("http://"+DOMAIN+"/app/build/index.html");
+//    	request.getRequestDispatcher("/build/detail.html").forward(request, response);
+//    	response.sendRedirect("http://"+DOMAIN+"/app/build/detail.html?activeId="+activeId);
     }
  
  
 }
+

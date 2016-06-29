@@ -22,15 +22,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.socialCalendar.WeChat.pojo.Config;
+import com.socialCalendar.WeChat.pojo.Token;
+import com.socialCalendar.WeChat.pojo.Token;
+import com.socialCalendar.WeChat.util.CommonUtil;
 import com.socialCalendar.WeChat.util.DateUtil;
 import com.socialCalendar.dataModel.Activity;
 import com.socialCalendar.dataModel.CommentDetail;
 import com.socialCalendar.pojo.Comment;
 import com.socialCalendar.pojo.Event;
+import com.socialCalendar.pojo.EventDetail;
 import com.socialCalendar.pojo.User;
 import com.socialCalendar.service.CommentService;
 import com.socialCalendar.service.EventService;
 import com.socialCalendar.service.UserService;
+import com.socialCalendar.service.WeChatService;
 
 @Controller
 @RequestMapping("/java")
@@ -41,6 +47,8 @@ public class EventFrontController extends BaseController{
 	private EventService eventService;
 	@Resource(name="userService")
 	private UserService userService;
+	@Resource(name="weChatService")
+	private WeChatService weChatService;
 	
 	/**
 	 * 1.获取用户个人活动列表
@@ -142,23 +150,29 @@ public class EventFrontController extends BaseController{
 	 */
 	@RequestMapping(value = "/getActiveDetail", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> detailEvent(@RequestParam("activeId")Integer activeId)
+	public Map<String, Object> detailEvent(HttpServletRequest request)
 			throws Exception {
 		HttpSession session = super.getRequest().getSession();
 		User user = (User) session.getAttribute("user");
+		String activeId =request.getParameter("activeId");
+		System.out.println(request.getParameter("activeId"));
 		System.out.println(user.getNickname()+"查看活动详情。getActiveDetail请求！==========");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<CommentDetail> commentDetails = new ArrayList<CommentDetail>();
 		List<String> avatarArrays = new ArrayList<String>();
 		int status = 2;
 		boolean isCreater = false;
-		Event event = eventService.findDetailEvent(activeId);
-		List<Comment> comment = commentService.findCommentByEventId(activeId);
+		Event event = eventService.findDetailEvent(Integer.valueOf(activeId));
+		List<Comment> comment = commentService.findCommentByEventId(Integer.valueOf(activeId));
+		boolean hasJoined = false;
 		//装载参与人头像
 		if(event!=null){
 			status = 1;	
 			for(int i = 0;i<event.getEventDetails().size();i++){
 				avatarArrays.add(event.getEventDetails().get(i).getParticipant().getHeadimgurl());
+				if(user.getId()==event.getEventDetails().get(i).getParticipantID()){
+					hasJoined = true;
+				}
 			}
 			//装载评论数据
 			if(comment!=null){
@@ -175,7 +189,10 @@ public class EventFrontController extends BaseController{
 					else break;
 				}
 			}
-			
+			//分享接口返回数据
+			String activiteUrl=request.getParameter("url");
+			Config config = weChatService.getConfig(activiteUrl);
+						
 			if(event.getPromoterID()==user.getId())isCreater = true;
 			//装载数据
 			map.put("authorAvatar", userService.findByUserIdUser(event.getPromoterID())
@@ -193,10 +210,13 @@ public class EventFrontController extends BaseController{
 			map.put("AvatarArray", avatarArrays);
 			map.put("commentList", commentDetails);
 			map.put("commentLength", comment.size());
+			map.put("config", config);
 			map.put("isCreater",isCreater);
+			map.put("hasJoined",hasJoined);
 			map.put("status", status);		
 		}
 		else map.put("status", status);
+		System.out.println(map);
 		return map;
 	}
 
@@ -252,6 +272,27 @@ public class EventFrontController extends BaseController{
 		comments.setCommentTime(DateUtil.strToTimestamp(json.getString("time")));
 		comments.setCommentContent(json.getString("content"));
 		status = commentService.addComment(comments);
+		map.put("status", status);		
+		return map;
+	}
+	/**
+	 * 7.加入活动
+	 */
+	@RequestMapping(value = "/joinActive", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> joinActive(@RequestBody Object active)
+			throws Exception {
+		HttpSession session = super.getRequest().getSession();
+		User user = (User) session.getAttribute("user");
+		System.out.println(user.getNickname()+"加入活动。joinActive请求！==========");
+		JSONObject json = JSONObject.fromObject(active);
+		Map<String, Object> map = new HashMap<String, Object>();
+		int status = 0;
+		EventDetail eventDetail  = new EventDetail();
+		eventDetail.setEventID(json.getInt("activeId"));
+		eventDetail.setParticipantID(user.getId());
+		eventDetail.setIsPromoter(0);
+		status = eventService.joinEvent(eventDetail);
 		map.put("status", status);		
 		return map;
 	}

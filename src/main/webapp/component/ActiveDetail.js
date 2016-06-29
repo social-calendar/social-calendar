@@ -60,16 +60,62 @@ class ActiveDetail extends React.Component{
     }
     componentDidMount(){
         var _this=this;
-	var activeId = location.search;
+	    var activeId = location.search;
         $.ajax({
-            url:"/app/java/getActiveDetail.do" + activeId,
+            url:"/app/java/getActiveDetail.do" + activeId + '&url=' + encodeURIComponent(location.href.split('#')[0]),
             type:'GET',
             success:function (result) {
-                _this.setState({
-                    data:result,
-                    commentList:result.commentList,
-                    AvatarArray:result.AvatarArray
-                });
+                if (result.hasJoined) {
+                    var appId = result.config.appId,
+                        timestamp = result.config.timestamp,
+                        nonceStr = result.config.nonceStr,
+                        signature = result.config.signature;
+                    var commonContent = {
+                        title: result.activeTheme,
+                        link: location.origin + location.pathname + location.search,
+                        imgUrl: result.authorAvatar,
+                        success: function () {
+                            /* 暂时为空 */
+                        },
+                        cancel: function () {
+                             /* 暂时为空 */ 
+                        }
+                    };
+                    _this.setState({
+                        data:result,
+                        commentList:result.commentList,
+                        AvatarArray:result.AvatarArray,
+                    });
+                    // 微信
+                    wx.config({
+                        debug: false,
+                        appId: appId,
+                        timestamp: timestamp,
+                        nonceStr: nonceStr,
+                        signature: signature,
+                        jsApiList: [
+                            'onMenuShareTimeline',
+                            'onMenuShareAppMessage'
+                            'onMenuShareQQ',
+                            'onMenuShareQZone'
+                        ]
+                    });
+                    wx.ready(function () {
+                        // 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
+                        wx.onMenuShareTimeline(commonContent);
+                        commonContent.desc = result.activeDetail;
+                        wx.onMenuShareAppMessage(commonContent);
+                        wx.onMenuShareQQ(commonContent);
+                        wx.onMenuShareQZone(commonContent);
+                    });
+                    wx.error(function (res) {
+                        var res = JSON.stringify(res);
+                        alert('错误信息：' + res);
+                    });
+                }else{//如果没有加入就跳到加入活动页面
+                    location.href='join.html' + activeId;
+                }
+               
             },
             error:function (xhr,error) {
                 console.log(error);

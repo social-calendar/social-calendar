@@ -5,3 +5,5 @@ build/
 auth
 QiyeProject
 WxTest
+app\WebRoot\WEB-INF\classes
+weChatpay
