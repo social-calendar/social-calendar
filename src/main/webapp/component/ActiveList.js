@@ -43,8 +43,7 @@ class ActiveList extends React.Component{
     }
 
     componentDidMount(){
-        ///app/java/getActiveList.do
-        $.get("test/activeInfo.json",function (result) {
+        $.get("/app/java/getActiveList.do",function (result) {
             this.setState({
                 data:result.data,
                 status:result.status

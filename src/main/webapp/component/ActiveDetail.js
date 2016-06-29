@@ -96,7 +96,7 @@ class ActiveDetail extends React.Component{
                         signature: signature,
                         jsApiList: [
                             'onMenuShareTimeline',
-                            'onMenuShareAppMessage'
+                            'onMenuShareAppMessage',
                             'onMenuShareQQ',
                             'onMenuShareQZone'
                         ]
