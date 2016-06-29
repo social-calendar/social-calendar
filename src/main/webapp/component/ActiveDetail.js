@@ -60,16 +60,21 @@ class ActiveDetail extends React.Component{
     }
     componentDidMount(){
         var _this=this;
-	var activeId = location.search;
+	    var activeId = location.search;
         $.ajax({
             url:"/app/java/getActiveDetail.do" + activeId,
             type:'GET',
             success:function (result) {
-                _this.setState({
-                    data:result,
-                    commentList:result.commentList,
-                    AvatarArray:result.AvatarArray
-                });
+                if (result.hasJoined) {
+                    _this.setState({
+                        data:result,
+                        commentList:result.commentList,
+                        AvatarArray:result.AvatarArray
+                    }); 
+                }else{//如果没有加入就跳到加入活动页面
+                    location.href='join.html'+activeId;
+                }
+               
             },
             error:function (xhr,error) {
                 console.log(error);
