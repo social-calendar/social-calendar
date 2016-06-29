@@ -9,7 +9,7 @@ const MyTheme = getMuiTheme({
       },
       appBar: {
         height: 50,
-      },
+      }
 });
 
 export default MyTheme;

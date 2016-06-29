@@ -72,6 +72,7 @@ class ActiveDetail extends React.Component{
                         signature = result.config.signature;
                     var commonContent = {
                         title: result.activeTheme,
+                        desc:'你有一条来自[社交日历]的邀约!<br/>点击查看详情',
                         link: location.origin + location.pathname + location.search,
                         imgUrl: result.authorAvatar,
                         success: function () {
