@@ -71,10 +71,10 @@ class ActiveDetail extends React.Component{
                         nonceStr = result.config.nonceStr,
                         signature = result.config.signature;
                     var commonContent = {
-                        title: "标题:"+result.activeTheme,
-                        desc:'你有一条来自[社交日历]的邀约!<br/>点击查看详情',
+                        title: result.activeTheme,
+                        desc:'你有一条来自[社交日历]的邀约!点击查看详情',
                         link: "http://isolarfun.com/app/wechat/oauthThree.do" + location.search,
-                        imgUrl: result.authorAvatar,
+                        imgUrl: "images/invitation.jpg",
                         success: function () {
                             /* 暂时为空 */
                         },
