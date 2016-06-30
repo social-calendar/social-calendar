@@ -36,12 +36,11 @@ public class WeChatMenuController {
     	response.setCharacterEncoding("UTF-8");
     	String activeId = request.getParameter("activeId");
     	System.out.println("activeId:"+activeId);
-    	User userinfo = userService.findByUserIdUser(11);
+    	User userinfo = userService.findByUserIdUser(17);
     	System.out.println("userInfo:"+userinfo);
     	HttpSession session = request.getSession();	
     	session.setAttribute("user", userinfo);
-//    	request.getRequestDispatcher("/build/detail.html").forward(request, response);
-//    	response.sendRedirect("http://"+DOMAIN+"/app/build/detail.html?activeId="+activeId);
+    	response.sendRedirect("/app/build/detail.html?activeId="+activeId);
     }
  
  

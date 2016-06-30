@@ -24,19 +24,24 @@ public class WeChatLoginInterceptor implements HandlerInterceptor {
 
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
+		
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		if(user==null){
+			return true;
+		}
 		//取出请求的url
 		String url = request.getRequestURI();
 		if(url.indexOf("loginsubmit.action")>=0){
 			//说明 公开地址
 			//放行
-			return true;
-		}
-		
+			
+		}		
 		//得到session
-		HttpSession session = request.getSession();
+		
 		
 		//从 session取出用户身份信息
-		User user = (User) session.getAttribute("user");
+		
 		
 		if(user!=null){
 			//说明 用户已登陆（用户身份合法）
@@ -63,20 +68,6 @@ public class WeChatLoginInterceptor implements HandlerInterceptor {
 			System.out.println("afterCompletion--------------");
 		
 	}	    
-	public void OAuth(HttpServletRequest request,
-	            HttpServletResponse response) throws IOException, ServletException {
-	    	request.setCharacterEncoding("UTF-8");
-	    	response.setCharacterEncoding("UTF-8");
-	    	String activeId = request.getParameter("activeId");
-	    	System.out.println("activeId:"+activeId);
-	    	User userinfo = userService.findByUserIdUser(1);
-	    	System.out.println("userInfo:"+userinfo);
-	    	HttpSession session = request.getSession();	
-	    	session.setAttribute("user", userinfo);
-//	    	request.getRequestDispatcher("/build/detail.html").forward(request, response);
-//	    	response.sendRedirect("http://"+DOMAIN+"/app/build/detail.html?activeId="+activeId);
-	    }
-	 
 	
 }
 */

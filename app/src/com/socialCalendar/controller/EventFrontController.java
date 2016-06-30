@@ -280,12 +280,12 @@ public class EventFrontController extends BaseController{
 	 */
 	@RequestMapping(value = "/joinActive", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> joinActive(@RequestBody Object active)
+	public Map<String, Object> joinActive(@RequestBody Object join)
 			throws Exception {
 		HttpSession session = super.getRequest().getSession();
 		User user = (User) session.getAttribute("user");
+		JSONObject json = JSONObject.fromObject(join);
 		System.out.println(user.getNickname()+"加入活动。joinActive请求！==========");
-		JSONObject json = JSONObject.fromObject(active);
 		Map<String, Object> map = new HashMap<String, Object>();
 		int status = 0;
 		EventDetail eventDetail  = new EventDetail();

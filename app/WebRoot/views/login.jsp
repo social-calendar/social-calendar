@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 		<title>社交日历</title>
 		<meta name="description" content="User login page" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,6 +23,7 @@
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/ace-ie.min.css" />
 		<![endif]-->
+		<%@include file="/views/common/css.jsp" %>
 	</head>
 	<body class="login-layout">
 			<br><br>
@@ -34,11 +36,11 @@
 									<div class="center">
 										<h1>
 											<i class="icon-leaf green"></i>
-											<span class="red">&nbsp;爱学校</span>
+											<span class="red">&nbsp;社交日历</span>
 											<span class="white"></span>
 											
 										</h1>
-										<h4 class="blue">&copy; <a href="http://weibo.com/2098099627" target="_blank">智云同学</a></h4>
+										<h4 class="blue">&copy; <a href="http://weibo.com/2098099627" target="_blank">copyright丨信管</a></h4>
 									</div>
 								</div>
 	
@@ -63,28 +65,35 @@
 													</c:if>
 													<div class="space-6"></div>
 	
-													<form action="<%=request.getContextPath()%>/login" method="post" id="login" >
+													<form class="am-form" action="<%=request.getContextPath()%>/login" method="post" id="login" >
 														<fieldset>
-															<label>
+															<%-- <label>
 																<span class="block input-icon input-icon-right">
 																	<input type="text" class="span12" name="username" <c:if test="${username!=null}">value="${username}"</c:if> placeholder="Username" />
 																	<i class="icon-user"></i>
 																</span>
-															</label>
-	
-															<label>
+															</label> --%>
+															<div class="am-input-group">
+																 		 <span class=""><i class="am-icon-user am-icon-fw"></i>账号</span>
+ 																		 <input type="text" class="am-form-field" placeholder="Username">
+															</div>
+															<div class="am-input-group">
+  																		<span class=""><i class="am-icon-lock am-icon-fw"></i>密码</span>
+															      		<input type="text" class="am-form-field" placeholder="Password">
+															</div>
+														<!-- 	<label>
 																<span class="block input-icon input-icon-right">
 																	<input type="password" class="span12" name="password" value="123456" placeholder="Password" />
 																	<i class="icon-lock"></i>
 																</span>
-															</label>
+															</label> -->
 	
 															<div class="space"></div>
 		
 															<div class="clearfix">
 																								 
 	
-																<button onclick="document.getElementById('login').submit();"  class="width-35 pull-right btn btn-small btn-primary">
+																<button onclick="document.getElementById('login').submit();"  class="am-btn am-btn-primary am-btn-xs">
 																	<i class="icon-key"></i>
 																	Login
 																</button>
@@ -94,11 +103,11 @@
 														</fieldset>
 													</form>
 													<div class="social-or-login center">
-													<span class="bigger-110">爱学校(aixuexiao)</span>
+													<span class="bigger-110">中南民族大学</span>
 													</div>
 													
 													<div class="social-login center">
-														<img alt="爱学校" src="<%=request.getContextPath()%>/assets/images/getqrcode.jpeg" style="height: 100px;width: 100px;" >
+														<img alt="二维码" src="<%=request.getContextPath()%>/assets/images/getqrcode.jpeg" style="height: 100px;width: 100px;" >
 													</div>
 													
 												</div><!--/widget-main-->

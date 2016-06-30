@@ -55,9 +55,9 @@
 							</table>
 							
 					 		<div class="dataTables_paginate paging_bootstrap pagination">
-							  <button class="btn btn-success btn-mini" onclick="location.href='<%=request.getContextPath() %>/manager/replys?pagenum=${pagenum-1}'" <c:if test="${pagenum <= 1}">disabled="disabled"</c:if>    >&laquo;</button>
-							  <button class="btn btn-success btn-mini" disabled="disabled">µÚ ${pagenum} Ò³</button>
-							  <button class="btn btn-success btn-mini" onclick="location.href='<%=request.getContextPath() %>/manager/replys?pagenum=${pagenum+1}'" <c:if test="${length < 10}">disabled="disabled"</c:if> >&raquo;</button>
+							  <button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='<%=request.getContextPath() %>/manager/replys?pagenum=${pagenum-1}'" <c:if test="${pagenum <= 1}">disabled="disabled"</c:if>    >&laquo;</button>
+							  <button class="am-btn am-btn-primary am-btn-xs" disabled="disabled">µÚ ${pagenum} Ò³</button>
+							  <button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='<%=request.getContextPath() %>/manager/replys?pagenum=${pagenum+1}'" <c:if test="${length < 10}">disabled="disabled"</c:if> >&raquo;</button>
 					 		</div>
 							 
 							<!--PAGE CONTENT ENDS-->

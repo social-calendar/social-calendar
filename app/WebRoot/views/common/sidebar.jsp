@@ -29,13 +29,13 @@
 			</a>
 			<ul class="submenu">
 				<li <c:if test="${sidebar=='messages'}">class="active"</c:if> >
-					<a href="<%=request.getContextPath()%>/manager/messages">
+					<a href="#">
 						<i class="icon-double-angle-right"></i>
 						修改密码
 					</a>
 				</li>
 				<li <c:if test="${sidebar=='replys'}">class="active"</c:if> >
-					<a href="<%=request.getContextPath()%>/manager/replys">
+					<a href="#">
 						<i class="icon-double-angle-right"></i>
 						信息查询
 					</a>
@@ -51,19 +51,19 @@
 			</a>
 			<ul class="submenu">
 				<li <c:if test="${sidebar=='messages'}">class="active"</c:if> >
-					<a href="<%=request.getContextPath()%>/manager/messages">
+					<a href="#">
 						<i class="icon-double-angle-right"></i>
 						接收消息
 					</a>
 				</li>
 				<li <c:if test="${sidebar=='replys'}">class="active"</c:if> >
-					<a href="<%=request.getContextPath()%>/manager/replys">
+					<a href="#">
 						<i class="icon-double-angle-right"></i>
 						回复消息
 					</a>
 				</li>
 				<li <c:if test="${sidebar=='replys'}">class="active"</c:if> >
-					<a href="<%=request.getContextPath()%>/manager/replys">
+					<a href="#">
 						<i class="icon-double-angle-right"></i>
 						菜单管理
 					</a>

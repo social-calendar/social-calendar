@@ -39,7 +39,7 @@
 										<option <c:if test="${event.eventDetails.participantID == ulist.id}">selected="selected"</c:if> value="${ulist.id}">${ulist.nickname}</option>
 									</c:forEach>
 								</select>&nbsp;&nbsp; --%>
-								<button  type="submit" class="btn btn-purple btn-small">
+								<button  type="submit" class="am-btn am-btn-primary am-btn-xs">
 									²éÕÒ
 									<i class="icon-search icon-on-right bigger-110"></i>
 								</button>
@@ -84,8 +84,8 @@
 										
 		
 										<td >
-											<button class="btn btn-mini btn-primary" onclick="location.href='<%=request.getContextPath() %>/manager/event/leavemessage?userid=${user.id}'" ><i class="icon-comment"></i>Î¢ĞÅÁôÑÔ</button>
-											<button class="btn btn-mini btn-primary" onclick="location.href='<%=request.getContextPath() %>/manager/event/detailEvent?userid=${user.id}'"><i class="icon-file"></i>ÏêÏ¸ĞÅÏ¢</button>
+											<button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='<%=request.getContextPath() %>/manager/event/leavemessage?userid=${user.id}'" ><i class="icon-comment"></i>ÁôÑÔ</button>
+											<button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='<%=request.getContextPath() %>/manager/event/detailEvent?userid=${user.id}'"><i class="icon-file"></i>ÏêÇé</button>
 										</td>
 									</tr>
 								</c:forEach>
@@ -93,9 +93,9 @@
 							</table>
 							
 					 		<div class="dataTables_paginate paging_bootstrap pagination">
-							  <button class="btn btn-success btn-mini" onclick="location.href='<%=request.getContextPath() %>/manager/event/listEvent.do?pagenum=${pagenum-1}'" <c:if test="${pagenum <= 1}">disabled="disabled"</c:if>    >&laquo;</button>
-							  <button class="btn btn-success btn-mini" disabled="disabled">µÚ ${pagenum} Ò³</button>
-							  <button class="btn btn-success btn-mini" onclick="location.href='<%=request.getContextPath() %>/manager/event/listEvent.do?pagenum=${pagenum+1}'" <c:if test="${length < 4}">disabled="disabled"</c:if> >&raquo;</button>
+							  <button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='<%=request.getContextPath() %>/manager/event/listEvent.do?pagenum=${pagenum-1}'" <c:if test="${pagenum <= 1}">disabled="disabled"</c:if>    >&laquo;</button>
+							  <button class="am-btn am-btn-primary am-btn-xs" disabled="disabled">µÚ ${pagenum} Ò³</button>
+							  <button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='<%=request.getContextPath() %>/manager/event/listEvent.do?pagenum=${pagenum+1}'" <c:if test="${length < 4}">disabled="disabled"</c:if> >&raquo;</button>
 					 		</div>
 							 
 							<!--PAGE CONTENT ENDS-->

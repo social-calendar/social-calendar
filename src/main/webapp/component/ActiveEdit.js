@@ -84,7 +84,7 @@ class AddActive extends React.Component{
             url:"/app/java/editActive.do",
             contentType:"application/json; charset=utf-8",
             data:JSON.stringify({
-		        activeId:(location.search.split('='))[1],
+		activeId:(location.search.split('='))[1],
                 activeTheme:this.refs.activeTheme.getValue(),//活动主题            
                 startTime:this.refs.startTime.getValue(),//开始时间
                 endTime:this.refs.endTime.getValue(),//结束时间

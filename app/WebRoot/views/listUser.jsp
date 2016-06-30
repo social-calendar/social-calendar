@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="GBK"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>ÓÃ»§ĞÅÏ¢</title>
+		<title>ç”¨æˆ·ä¿¡æ¯</title>
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<%@include file="/views/common/css.jsp" %>
@@ -23,7 +23,7 @@
 						<h1>
 							<small>
 								<i class="icon-user"></i>
-								ÓÃ»§ĞÅÏ¢
+								ç”¨æˆ·ä¿¡æ¯
 							</small>
 						</h1>
 					</div> 
@@ -32,46 +32,46 @@
 							<!--PAGE CONTENT BEGINS-->
 							<form class="form-inline" method="get" action="<%=request.getContextPath() %>/manager/user/listUser.do">
 								<input type="hidden" name="pagenum" value="${pagenum}">
-								&nbsp;&nbsp;êÇ³Æ£º<input type="text" name="nickname" value="${user.nickname}"  class="input-medium search-query">&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;æ˜µç§°ï¼š<input  type="text" am-form-group name="nickname" value="${user.nickname}"  class="input-medium search-query">&nbsp;&nbsp;&nbsp;&nbsp;
 				<%-- 				<select name="classid">
-									<option value="0">Ñ¡Ôñ°à¼¶</option>
+									<option value="0">é€‰æ‹©ç­çº§</option>
 									<c:forEach items="${clsList}"  var="cls"  >
 										<option <c:if test="${student.classid == cls.id}">selected="selected"</c:if> value="${cls.id}">${cls.name}</option>
 									</c:forEach>
 								</select>&nbsp;&nbsp; --%>
-								<button  type="submit" class="btn btn-purple btn-small">
-									²éÕÒ
+								<button  type="submit" class="am-btn  am-btn-primary am-btn-sm">
+									æœç´¢
 									<i class="icon-search icon-on-right bigger-110"></i>
 								</button>
 							</form>
 							<table id="sample-table-1" class="table table-striped table-bordered table-hover">
 								<thead>
 									<tr>
-										<th width="15%">ÓÃ»§±àºÅ</th>
-										<th width="22%">Í·Ïñ</th>
-										<th width="15%">ÓÃ»§êÇ³Æ</th>
+										<th width="10%">ç”¨æˆ·ç¼–å·</th>
+										<th width="10%">å¤´åƒ</th>
+										<th width="15%">ç”¨æˆ·æ˜µç§°</th>
 										
-										<th width="8%">ÓÃ»§ĞÔ±ğ</th>
-										<th	width="15%">¹Ø×¢Ê±¼ä</th>
-										<th>²Ù×÷</th>
+										<th width="12%">ç”¨æˆ·æ€§åˆ«</th>
+										<th	width="35%">OpenID</th>
+										<th>æ“ä½œ</th>
 									</tr>
 								</thead>
 								<tbody>
 								<c:forEach items="${userList}"  var="user"  >
 									<tr>
 										<td><a href="#">${user.id}</a></td>
-										<td>${user.headimgurl}</td>
+										<td><img class="our_img" src="${user.headimgurl}"/></td>
 										<td>${user.nickname}</td>
 										<c:if test="${user.sex == 1}">
-											<td>ÄĞ</td>			
+											<td class="row text-center">ç”·</td>			
 										</c:if>
-										<c:if test="${user.sex == 0}">
-											<td>Å®</td>			
+										<c:if test="${user.sex != 1}">
+											<td class="row text-center">å¥³</td>			
 										</c:if>			
-										<td>${user.subscribeTime}</td>
+										<td>${user.openID}</td>
 										<td >
-											<button class="btn btn-mini btn-primary" onclick="location.href='<%=request.getContextPath() %>/manager/user/leavemessage?userid=${user.id}'" ><i class="icon-comment"></i>Î¢ĞÅÁôÑÔ</button>
-											<button class="btn btn-mini btn-primary" onclick="location.href='<%=request.getContextPath() %>/manager/user/detailUser?userid=${user.id}'"><i class="icon-file"></i>ÏêÏ¸ĞÅÏ¢</button>
+											<button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='/views/wechatMessage.jsp'" ><i class="icon-comment"></i>ç•™è¨€</button>
+											<button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='<%=request.getContextPath() %>/manager/user/detailUser?userid=${user.id}'"><i class="icon-file"></i>è¯¦æƒ…</button>
 										</td>
 									</tr>
 								</c:forEach>
@@ -79,9 +79,9 @@
 							</table>
 							
 					 		<div class="dataTables_paginate paging_bootstrap pagination">
-							  <button class="btn btn-success btn-mini" onclick="location.href='<%=request.getContextPath() %>/manager/user/listUser.do?pagenum=${pagenum-1}'" <c:if test="${pagenum <= 1}">disabled="disabled"</c:if>    >&laquo;</button>
-							  <button class="btn btn-success btn-mini" disabled="disabled">µÚ ${pagenum} Ò³</button>
-							  <button class="btn btn-success btn-mini" onclick="location.href='<%=request.getContextPath() %>/manager/user/listUser.do?pagenum=${pagenum+1}'" <c:if test="${length < 8}">disabled="disabled"</c:if> >&raquo;</button>
+							  <button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='<%=request.getContextPath() %>/manager/user/listUser.do?pagenum=${pagenum-1}'" <c:if test="${pagenum <= 1}">disabled="disabled"</c:if>    >&laquo;</button>
+							  <button class="am-btn am-btn-primary am-btn-xs" disabled="disabled">ç¬¬ ${pagenum} é¡µ</button>
+							  <button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='<%=request.getContextPath() %>/manager/user/listUser.do?pagenum=${pagenum+1}'" <c:if test="${length < 8}">disabled="disabled"</c:if> >&raquo;</button>
 					 		</div>
 							 
 							<!--PAGE CONTENT ENDS-->

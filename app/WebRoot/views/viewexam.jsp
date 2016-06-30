@@ -65,7 +65,7 @@
 										</tbody>
 									</table>
 								 		
-									<button class="btn btn-info" type="button" onclick="location.href='<%=request.getContextPath() %>/manager/exams'" >
+									<button class="am-btn am-btn-primary am-btn-xs" type="button" onclick="location.href='<%=request.getContextPath() %>/manager/exams'" >
 										<i class="icon-arrow-left"></i>
 										·µ»Ø
 									</button>
