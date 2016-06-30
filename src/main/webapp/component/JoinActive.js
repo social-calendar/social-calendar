@@ -106,14 +106,20 @@ class JoinActive extends React.Component{
         var activeId = location.search;
         $.ajax({
             type:"POST",
-            url:"/app/java/joinActive.do"+activeId,
+            url:"/app/java/joinActive.do",
             contentType:"application/json; charset=utf-8",
+            data:{
+                activeId:(location.search.split('='))[1],
+            },
             success:function (result) {
                if (result.status===1) {
                     location.href="detail.html"+activeId;
                }else{
                     alert('加入失败!');
                }
+            },
+            error:function (xhr,error) {
+                console.log(error);
             }
         });
     }
