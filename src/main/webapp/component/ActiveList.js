@@ -55,7 +55,7 @@ class ActiveList extends React.Component{
         return(
         <div>
             <Paper zDepth={0}>
-                <List>
+                <List style={{paddingBottom:0,paddingTop:0}}>
                     {this.state.status===2?
                         <ListItem>你还没有活动哦，快去创建吧!</ListItem>
                         :

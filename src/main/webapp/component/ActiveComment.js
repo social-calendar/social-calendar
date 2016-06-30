@@ -73,7 +73,7 @@ class ActiveComment extends React.Component{
 		return(
 			<div>
 				<Paper zDepth={0}>
-					<List>
+					<List style={{paddingBottom:0,paddingTop:0}}>
 						{
 							this.state.data.map(function (comment,index) {
 							 	return(
