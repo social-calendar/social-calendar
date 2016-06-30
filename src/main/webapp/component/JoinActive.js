@@ -29,6 +29,8 @@ import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 import Edit from 'material-ui/svg-icons/image/edit';
 import Editor from 'material-ui/svg-icons/editor/border-color';
 
+injectTapEventPlugin();
+
 const paperStyle={
     marginBottom:20,
 };
@@ -113,13 +115,14 @@ class JoinActive extends React.Component{
             },
             success:function (result) {
                if (result.status===1) {
+                    console.log('test');
                     location.href="detail.html"+activeId;
                }else{
                     alert('加入失败!');
                }
             },
             error:function (xhr,error) {
-                console.log(error);
+                console.log('touch '+error);
             }
         });
     }
