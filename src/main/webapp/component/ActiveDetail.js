@@ -74,7 +74,7 @@ class ActiveDetail extends React.Component{
                         title: result.activeTheme,
                         desc:'你有一条来自[社交日历]的邀约!点击查看详情',
                         link: "http://isolarfun.com/app/wechat/oauthThree.do" + location.search,
-                        imgUrl: "images/invitation.jpg",
+                        imgUrl: result.authorAvatar,
                         success: function () {
                             /* 暂时为空 */
                         },
