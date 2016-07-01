@@ -42,7 +42,5 @@ public class WeChatMenuController {
     	session.setAttribute("user", userinfo);
     	response.sendRedirect("/app/build/detail.html?activeId="+activeId);
     }
- 
- 
 }
 

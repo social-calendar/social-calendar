@@ -1,4 +1,4 @@
-//活动详情
+﻿//活动详情
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -110,9 +110,9 @@ class JoinActive extends React.Component{
             type:"POST",
             url:"/app/java/joinActive.do",
             contentType:"application/json; charset=utf-8",
-            data:{
+            data:JSON.stringify({
                 activeId:(location.search.split('='))[1],
-            },
+             }),
             success:function (result) {
                if (result.status===1) {
                     console.log('test');
