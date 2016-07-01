@@ -42,8 +42,8 @@ class ActiveList extends React.Component{
         }
     }
 
-    componentDidMount(){
-        $.get("/app/java/getActiveList.do",function (result) {
+    componentDidMount(){// /app/java/getActiveList.do
+        $.get("test/activeInfo.json",function (result) {
             this.setState({
                 data:result.data,
                 status:result.status
@@ -62,7 +62,13 @@ class ActiveList extends React.Component{
                         this.state.data.map(function(result,index){
                             return (
                             <div key={result.activeId}>
-                                <Subheader>{Formate.formate(result.startTime,'date')}</Subheader>                                
+                                {
+                                     Formate.formate(result.startTime,'date')===Formate.formate(new Date(),'date')?//如果是今天
+                                    <Subheader style={{backgroundColor:'#ACDEC1',color:'white'}}>今天 {Formate.formate(new Date(),'date')}</Subheader>
+                                     :
+                                     <Subheader>{Formate.formate(result.startTime,'date')}</Subheader>
+ 
+                                 }                               
                                 <ListItem
                                     leftAvatar={<Avatar icon={<ActionAssignment />} backgroundColor={tealA700} />}
                                     primaryText={Formate.formate(result.startTime,'time')+"-"+Formate.formate(result.endTime,'time')}

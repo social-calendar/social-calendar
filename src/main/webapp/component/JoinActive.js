@@ -111,8 +111,13 @@ class JoinActive extends React.Component{
             url:"/app/java/joinActive.do",
             contentType:"application/json; charset=utf-8",
             data:JSON.stringify({
+<<<<<<< HEAD
                 activeId:(location.search.split('='))[1],
              }),
+=======
+                activeId:(location.search.split('='))[1],                        
+            }),
+>>>>>>> 9e73b6595a12b16efeb7c92205b0bf1e37ee171d
             success:function (result) {
                if (result.status===1) {
                     console.log('test');

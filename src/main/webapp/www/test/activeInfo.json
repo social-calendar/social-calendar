@@ -34,7 +34,7 @@
 			"activeId":4,
 			"author":"小玲",
 			"activeTheme":"聚餐2",
-			"startTime":"2016-06-29 18:30",
+			"startTime":"2016-06-30 18:30",
 			"endTime":"2016-06-29 21:30",
 			"place":"幸福小镇",
 			"activeDetail":"带上钱，AA",
@@ -44,7 +44,7 @@
 			"activeId":5,
 			"author":"小玲",
 			"activeTheme":"聚餐3",
-			"startTime":"2016-06-29 18:30",
+			"startTime":"2016-06-30 18:30",
 			"endTime":"2016-06-29 21:30",
 			"place":"幸福小镇",
 			"activeDetail":"带上钱，AA",
@@ -70,5 +70,5 @@
 			"commentDetail":"幸福小镇辣么贵，AA吃不起啊"
 		}
 	],
-	"status":2
+	"status":1
 }
