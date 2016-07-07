@@ -2,15 +2,15 @@
 
 ##效果展示
 首页<br/>
-![首页](screenshot/1.jpg)
+![首页](screenshot/1.jpg)<br/>
 添加活动<br/>
-![添加活动](screenshot/2.jpg)
+![添加活动](screenshot/2.jpg)<br/>
 活动详情<br/>
-![活动详情](screenshot/3.jpg)
+![活动详情](screenshot/3.jpg)<br/>
 编辑活动<br/>
-![编辑活动](screenshot/4.jpg)
+![编辑活动](screenshot/4.jpg)<br/>
 活动讨论<br/>
-![活动讨论](screenshot/5.jpg)
+![活动讨论](screenshot/5.jpg)<br/>
 ##clone项目到本地
 1.安装git<br/>
 2.初始化配置
