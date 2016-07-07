@@ -1,6 +1,16 @@
 #社交日历开发配置
 
-
+##效果展示
+首页
+![首页](screenshot/1.jpg)
+添加活动
+![添加活动](screenshot/2.jpg)
+活动详情
+![活动详情](screenshot/3.jpg)
+编辑活动
+![编辑活动](screenshot/4.jpg)
+活动讨论
+![活动讨论](screenshot/5.jpg)
 ##clone项目到本地
 1.安装git<br/>
 2.初始化配置
