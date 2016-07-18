@@ -1,5 +1,3 @@
-#社交日历开发配置
-
 ##效果展示
 首页<br/>
 ![首页](screenshot/1.jpg)<br/>
@@ -11,6 +9,10 @@
 ![编辑活动](screenshot/4.jpg)<br/>
 活动讨论<br/>
 ![活动讨论](screenshot/5.jpg)<br/>
+加入活动<br/>
+![加入活动](screenshot/6.jpg)<br/>
+#社交日历开发配置
+
 ##clone项目到本地
 1.安装git<br/>
 2.初始化配置
@@ -67,5 +69,5 @@ git config --global user.email "your github's email"
 2.生成静态文件
 
 ```sh
-npm run build
+    npm run build
 ```
