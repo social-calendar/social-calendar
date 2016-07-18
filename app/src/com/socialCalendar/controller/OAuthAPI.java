@@ -29,8 +29,8 @@ import com.socialCalendar.service.UserService;
 public class OAuthAPI {
  
 	
-	//public static final String DOMAIN = "152m09481l.iask.in";
-    public static final String DOMAIN = "isolarfun.com";
+	public static final String DOMAIN = "152m09481l.iask.in";
+    //public static final String DOMAIN = "isolarfun.com";
     
     @Resource(name="userService")
     private UserService userService;
