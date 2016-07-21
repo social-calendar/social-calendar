@@ -64,7 +64,7 @@ class ActiveList extends React.Component{
                             <div key={result.activeId}>
                                 {
                                      Formate.formate(result.startTime,'date')===Formate.formate(new Date(),'date')?//如果是今天
-                                    <Subheader style={{backgroundColor:'#ACDEC1',color:'white'}}>今天 {Formate.formate(new Date(),'date')}</Subheader>
+                                    <Subheader style={{backgroundColor:'#00BFA5',color:'white'}}>今天 {Formate.formate(new Date(),'date')}</Subheader>
                                      :
                                      <Subheader>{Formate.formate(result.startTime,'date')}</Subheader>
  
