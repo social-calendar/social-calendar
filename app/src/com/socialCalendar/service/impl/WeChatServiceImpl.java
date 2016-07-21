@@ -76,7 +76,7 @@ public class WeChatServiceImpl implements WeChatService {
 				String eventType = requestMap.get("Event");
 				// 关注
 				if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-					respContent = "团队人员：李焕,石佳楠,贺志凯,王小调. 社交日历欢迎您的关注，我们将为你提供最优质的服务!-----.";
+					respContent = "团队人员：李焕,石佳楠,贺志凯,王小调. 社交日历欢迎您的关注，中南民族大学!-----.";
 				}
 				// 取消关注
 				else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
@@ -92,6 +92,9 @@ public class WeChatServiceImpl implements WeChatService {
 				}
 				// 自定义菜单
 				else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
+					if(requestMap.get("EventKey").equals("day")){
+						respContent = "不好意思,这个功能正在建设中.";
+					}
 					// TODO 处理菜单点击事件
 				}
 			}

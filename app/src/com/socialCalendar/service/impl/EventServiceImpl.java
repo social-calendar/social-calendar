@@ -30,6 +30,10 @@ public class EventServiceImpl implements EventService {
 	public List<Event> findListEvent(Map<String, Object> map) {
 		return eventDao.findListEvent(map);
 	}
+	@Override
+	public List<Event> findMgtListEvent(Map<String, Object> map) {
+		return eventDao.findMgtListEvent(map);
+	}
 	
 	@Override
 	public int updateEvent(Event event) {

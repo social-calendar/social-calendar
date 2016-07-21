@@ -41,7 +41,7 @@ public class EventMgtController{
 	map.put("start", (num-1)*pagesize);
 	map.put("size", pagesize);
 	map.put("overall", StringUtil.formatLike(event.getTitle()));
-	List<Event> list = eventService.findListEvent(map);
+	List<Event> list = eventService.findMgtListEvent(map);
 	System.out.println(list);
 	mv.addObject("eventList", list);
 	mv.addObject("length", list.size());

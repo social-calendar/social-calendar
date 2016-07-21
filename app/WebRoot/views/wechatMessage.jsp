@@ -31,7 +31,7 @@
 						
 						<div class="span12">
 							<!--PAGE CONTENT BEGINS-->
-							<form action="addmessage" id="addmessage" method="post">
+							<form action="#" id="addmessage" method="post">
 									<label for="form-field-8">给 <b>${student.name}</b> 用户（编号:<b>${student.id}</b>）微信留言  </label>
 									<input type="hidden" name="studentid" value="${student.id}">
 									<textarea class="span12" name="content" id="content" rows="4" placeholder="留言内容"></textarea>
@@ -40,7 +40,7 @@
 										<i class="icon-inbox"></i>
 										留言
 									</button>
-									<button class="am-btn am-btn-primary am-btn-xs" type="button" onclick="location.href='<%=request.getContextPath() %>/manager/students'" >
+									<button class="am-btn am-btn-primary am-btn-xs" type="button" onclick="location.href='<%=request.getContextPath() %>/manager/user/listUser.do'" >
 										<i class="icon-arrow-left"></i>
 										返回
 									</button>

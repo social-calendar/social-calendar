@@ -64,5 +64,11 @@ public interface EventService {
      */
     public int quitEvent(EventDetail eventDetail);
     
+    /**
+     * 活动列表查询
+     * @param map
+     * @return活动集合
+     */
+    public List<Event> findMgtListEvent(Map<String, Object> map);
    
 }

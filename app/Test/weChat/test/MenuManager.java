@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class MenuManager {
 	
 	private static Logger log = LoggerFactory.getLogger(MenuManager.class);
-	//private static String ApiUrl="http://152m09481l.iask.in/app/wechat/oauth.do";
+	//private static String ApiUrl="http://www.seven.iego.cn/app/wechat/oauth.do";
 	private static String ApiUrl="http://isolarfun.com/app/wechat/";
 
 	/**
@@ -80,6 +80,7 @@ public class MenuManager {
 		btn12.setUrl("http://isolarfun.com/app/wechat/oauthTwo.do");
 		
 		ClickButton btn22 = new ClickButton();
+	
 		btn22.setName("每日精选");
 		btn22.setType("click");
 		btn22.setKey("day");

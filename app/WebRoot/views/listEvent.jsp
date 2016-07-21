@@ -83,9 +83,11 @@
 										</td>
 										
 		
-										<td >
-											<button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='<%=request.getContextPath() %>/manager/event/leavemessage?userid=${user.id}'" ><i class="icon-comment"></i>¡Ù—‘</button>
-											<button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='<%=request.getContextPath() %>/manager/event/detailEvent?userid=${user.id}'"><i class="icon-file"></i>œÍ«È</button>
+										<td>
+										<center>
+											<!-- onclick="location.href='<%=request.getContextPath() %>/manager/event/detailEvent?userid=${user.id}'" -->
+											<button class="am-btn am-btn-primary am-btn-xs" ><i class="icon-file"></i>œÍ«È</button>
+										</center>
 										</td>
 									</tr>
 								</c:forEach>
