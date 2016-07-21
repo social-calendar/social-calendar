@@ -70,8 +70,8 @@
 										</c:if>			
 										<td>${user.openID}</td>
 										<td >
-											<button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='/views/wechatMessage.jsp'" ><i class="icon-comment"></i>留言</button>
-											<button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='<%=request.getContextPath() %>/manager/user/detailUser?userid=${user.id}'"><i class="icon-file"></i>详情</button>
+											<button class="am-btn am-btn-primary am-btn-xs" onclick="location.href='<%=request.getContextPath() %>/views/wechatMessage.jsp'" ><i class="icon-comment"></i>留言</button>
+											<button class="am-btn am-btn-primary am-btn-xs" onclick=""><i class="icon-file"></i>详情</button>
 										</td>
 									</tr>
 								</c:forEach>

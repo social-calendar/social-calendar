@@ -22,8 +22,8 @@ import org.slf4j.LoggerFactory;
 public class MenuManager {
 	
 	private static Logger log = LoggerFactory.getLogger(MenuManager.class);
-	private static String ApiUrl="http://152m09481l.iask.in/app/wechat/oauth.do";
-	//private static String ApiUrl="http://isolarfun.com/app/wechat/";
+	//private static String ApiUrl="http://www.seven.iego.cn/app/wechat/oauth.do";
+	private static String ApiUrl="http://isolarfun.com/app/wechat/";
 
 	/**
 	 * 定义菜单结构
@@ -72,14 +72,15 @@ public class MenuManager {
 		ViewButton btn11 = new ViewButton();
 		btn11.setName("我的活动");
 		btn11.setType("view");
-		btn11.setUrl("http://152m09481l.iask.in/app/wechat/oauthOne.do");
+		btn11.setUrl("http://isolarfun.com/app/wechat/oauthOne.do");
 		
 		ViewButton btn12 = new ViewButton();
 		btn12.setName("创建活动");
 		btn12.setType("view");
-		btn12.setUrl("http://152m09481l.iask.in/app/wechat/oauthTwo.do");
+		btn12.setUrl("http://isolarfun.com/app/wechat/oauthTwo.do");
 		
 		ClickButton btn22 = new ClickButton();
+	
 		btn22.setName("每日精选");
 		btn22.setType("click");
 		btn22.setKey("day");

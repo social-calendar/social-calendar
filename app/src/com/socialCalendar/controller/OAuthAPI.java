@@ -29,8 +29,9 @@ import com.socialCalendar.service.UserService;
 public class OAuthAPI {
  
 	
-	public static final String DOMAIN = "152m09481l.iask.in";
-    //public static final String DOMAIN = "isolarfun.com";
+	//public static final String DOMAIN = "152m09481l.iask.in";
+    public static final String DOMAIN = "isolarfun.com";
+	//public static final String DOMAIN = "www.seven.iego.cn";
     
     @Resource(name="userService")
     private UserService userService;
@@ -55,11 +56,10 @@ public class OAuthAPI {
             oauth_url.append("&redirect_uri=").append(serviceUrl);
             oauth_url.append("&response_type=code");
             oauth_url.append("&scope=snsapi_userinfo");
-            oauth_url.append("&state=");
             oauth_url.append("&state=STATE");            
             oauth_url.append("#wechat_redirect");
             response.sendRedirect(oauth_url.toString());
-            return;
+         return;
         }
         //如果用户同意授权并且，用户session不存在，通过OAUTH接口调用获取用户信息
         if (isValidCode && session.getAttribute("user") == null) {

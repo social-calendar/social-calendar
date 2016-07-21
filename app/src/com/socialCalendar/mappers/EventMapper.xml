@@ -40,19 +40,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	</association>
     	</collection>
     </resultMap>
+    
     	
-    <!-- 全局搜索 
+    <!-- 后台全局搜索  -->
+      <select id="findMgtListEvent" parameterType="Map" resultMap="eventUserDetailResultMap">
+        select * from event_attribute,user_wechat,event_detail
+        <where>
+        		AND	event_detail.event_id = event_attribute.event_id
+				AND user_wechat.user_id = event_detail.event_participantID
+            <!-- 按条件索引 -->
         	<if test="overall!=null and overall!='' ">
-               	AND event_attribute.event_title like #{overall}
-               	AND event_attribute.event_startDate like #{overall}
-               	AND event_attribute.event_endDate like #{overall}
-               	AND event_attribute.event_content like #{overall}
-               	AND event_attribute.event_place like #{overall}   	
-               	AND user_wechat.user_nickname like #{overall}   	
+               	AND event_attribute.event_title like #{overall}               
+               	OR event_attribute.event_content like #{overall}
+               	OR event_attribute.event_place like #{overall}   	
+               	OR user_wechat.user_nickname like #{overall}     	 	
             </if>
-           order by event_detail.event_id  
-	     limit #{start},#{size}
-    -->	
+            </where>
+            order by event_detail.event_id  
+	        limit #{start},#{size}    
+    </select>
     	<!-- 活动列表查询(包括参与人)_按各种条件集合查询 -->
     <select id="findListEvent" parameterType="Map" resultMap="eventUserDetailResultMap">
         select * from event_attribute,user_wechat,event_detail
